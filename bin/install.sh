@@ -3,7 +3,8 @@
 set -e
 [ -n "$NODENV_DEBUG" ] && set -x
 
-NPM_HOOKS_DIR="$(nodenv prefix)/lib/node_modules/.hooks"
+NODE_DIR="${1:-$(nodenv prefix)}"
+NPM_HOOKS_DIR="$NODE_DIR/lib/node_modules/.hooks"
 
 mkdir -p "$NPM_HOOKS_DIR"
 
