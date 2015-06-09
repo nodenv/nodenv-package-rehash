@@ -4,8 +4,8 @@ load test_helper
 
 setup() {
   create_versions 0.10 0.12
-  stub nodenv-prefix ': 0.10' \
-                     '0.12 : 0.12'
+  stub nodenv-prefix '0.10'
+  stub nodenv-prefix '0.12 : 0.12'
 }
 
 @test "nodenv-package-hooks install" {
