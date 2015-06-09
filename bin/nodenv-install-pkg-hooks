@@ -11,5 +11,10 @@ echo "INSTALLING HOOK SCRIPTS to $NPM_HOOKS_DIR"
 mkdir -p "$NPM_HOOKS_DIR"
 
 # install the postinstall/postuninstall hook scripts by symlinking them
-ln -nsf "${BASH_SOURCE%/*}/../libexec/nodenv-rehash.sh" "${NPM_HOOKS_DIR}/postinstall"
-ln -nsf "${BASH_SOURCE%/*}/../libexec/nodenv-rehash.sh" "${NPM_HOOKS_DIR}/postuninstall"
+PLUGIN_ROOT="${BASH_SOURCE%/*}/../"
+REHASH="$PLUGIN_ROOT/libexec/nodenv-rehash.sh"
+POSTINSTALL_HOOK="$NPM_HOOKS_DIR/postinstall"
+POSTUNINSTALL_HOOK="$NPM_HOOKS_DIR/postuninstall"
+
+ln -nsf "$REHASH" "$POSTINSTALL_HOOK"
+ln -nsf "$REHASH" "$POSTUNINSTALL_HOOK"
