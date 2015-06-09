@@ -3,7 +3,7 @@
 set -e
 [ -n "$NODENV_DEBUG" ] && set -x
 
-NODE_DIR="${1:-$(nodenv prefix)}"
+NODE_DIR="$(nodenv-prefix "$1")"
 NPM_HOOKS_DIR="$NODE_DIR/lib/node_modules/.hooks"
 
 echo "INSTALLING HOOK SCRIPTS to $NPM_HOOKS_DIR"
