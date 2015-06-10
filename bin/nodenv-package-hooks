@@ -1,0 +1,53 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$NODENV_DEBUG" ] && set -x
+
+HOOKS_DIR="lib/node_modules/.hooks/"
+
+
+
+versions() {
+  case "$1" in
+    "")    nodenv-version-name    ;; # list active version
+    --all) nodenv-versions --bare ;; # list all installed versions
+    *)     echo "$@"              ;; # list specififed versions
+  esac
+}
+
+list_hooks_for() {
+  for v in "$@"; do
+    local version_hooks="$(nodenv-prefix "$v")/$HOOKS_DIR"
+
+    echo $v
+    if [ -d "$version_hooks" ]; then
+      ls "$version_hooks"
+    else
+      echo "no hooks installed"
+    fi
+  done
+}
+
+
+cmd="$1"
+shift
+
+case "$cmd" in
+
+  list)
+
+    list_hooks_for $(versions "$@") ;;
+
+  install)
+
+    ;;
+
+  uninstall)
+
+    ;;
+
+  *)
+
+    ;;
+
+esac

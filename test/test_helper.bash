@@ -8,11 +8,13 @@ export INSTALL_HOOK="${BATS_TEST_DIRNAME}/../etc/nodenv.d/install/install-hook-s
 
 PATH=/usr/bin:/bin:/usr/sbin:/sbin
 PATH="$BATS_TEST_DIRNAME/../bin:$PATH"
+PATH="$TMP/bin:$PATH"
 export PATH
 
-# teardown() {
-#   rm -rf "$NODENV_TEST_DIR"
-# }
+teardown() {
+  rm -rf "$NODENV_TEST_DIR"
+  rm -rf "$TMP"
+}
 
 flunk() {
   { if [ "$#" -eq 0 ]; then cat -
@@ -34,8 +36,8 @@ create_versions() {
 }
 
 
-assert_hook_script() {
-  "$1"
+assert_package_hooks() {
+  assert_line FOO
 }
 
 assert_success() {
@@ -78,7 +80,10 @@ assert_line() {
     for line in "${lines[@]}"; do
       if [ "$line" = "$1" ]; then return 0; fi
     done
-    flunk "expected line \`$1'"
+    flunk <<MSG
+    expected line '$1' in:
+${output}
+MSG
   fi
 }
 
