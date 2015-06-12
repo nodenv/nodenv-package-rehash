@@ -21,11 +21,6 @@ setup() {
   touch $NODENV_ROOT/versions/0.12/lib/node_modules/.hooks/postuninstall
 }
 
-# teardown() {
-#   # unstub nodenv-prefix
-#   # unstub nodenv-versions
-# }
-
 @test "nodenv-package-hooks list" {
   run nodenv-package-hooks list
 
