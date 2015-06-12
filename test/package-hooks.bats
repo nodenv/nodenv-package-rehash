@@ -8,7 +8,7 @@ setup() {
   stub nodenv-versions \
     "--bare : echo 0.10 0.12"
   stub nodenv-prefix \
-    " : echo $NODENV_ROOT/versions/0.10" \
+    "echo $NODENV_ROOT/versions/0.10" \
     "0.10 : echo $NODENV_ROOT/versions/0.10" \
     "0.12 : echo $NODENV_ROOT/versions/0.12"
 

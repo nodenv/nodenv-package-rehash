@@ -35,18 +35,18 @@ if [ -z "${!_STUB_END}" ]; then
   while IFS= read -r line; do
     index=$(($index + 1))
 
+    command="$line"
+    actual_arguments="$@"
+
     # Split the line into an array of arguments to
     # match and a command to run to produce output.
-    command="$line"
     if [ "$command" != "${command/ : }" ]; then
       expected_args="${command%% : *}"
       command="${command#* : }"
     fi
 
-    arguments="$@"
-
     # If the arguments match, evaluate the command in a subshell.
-    if [ "$arguments" = "$expected_args" ]; then
+    if [ "$actual_arguments" = "$expected_args" ]; then
 
       set +e
       ( eval "$command" )
