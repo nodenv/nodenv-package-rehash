@@ -131,7 +131,7 @@ stub() {
   export "${prefix}_STUB_END"=
 
   mkdir -p "${TMP}/bin"
-  ln -sf "${BATS_TEST_DIRNAME}/stubs/stub" "${TMP}/bin/${program}"
+  ln -sf "${BATS_TEST_DIRNAME}/helpers/stub" "${TMP}/bin/${program}"
 
   touch "${TMP}/${program}-stub-plan"
   for arg in "$@"; do printf "%s\n" "$arg" >> "${TMP}/${program}-stub-plan"; done
