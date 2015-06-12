@@ -8,8 +8,6 @@ PROGRAM="$(echo "$program" | tr a-z- A-Z_)"
 
 _STUB_PLAN="${PROGRAM}_STUB_PLAN"
 _STUB_RUN="${PROGRAM}_STUB_RUN"
-_STUB_INDEX="${PROGRAM}_STUB_INDEX"
-_STUB_RESULT="${PROGRAM}_STUB_RESULT"
 _STUB_END="${PROGRAM}_STUB_END"
 _STUB_DEBUG="${PROGRAM}_STUB_DEBUG"
 
@@ -22,8 +20,6 @@ fi
 
 
 # Initialize or load the stub run information.
-eval "${_STUB_INDEX}"=1
-eval "${_STUB_RESULT}"=0
 [ ! -e "${!_STUB_RUN}" ] || source "${!_STUB_RUN}"
 
 
