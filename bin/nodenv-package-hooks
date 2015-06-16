@@ -1,0 +1,77 @@
+#!/usr/bin/env bash
+
+set -e
+[ -n "$NODENV_DEBUG" ] && set -x
+
+PLUGIN_ROOT="${BASH_SOURCE%/*}/.."
+HOOKS_DIR="lib/node_modules/.hooks"
+POSTINSTALL_HOOK="$HOOKS_DIR/postinstall"
+POSTUNINSTALL_HOOK="$HOOKS_DIR/postuninstall"
+
+
+versions() {
+  case "$1" in
+    "")    nodenv-version-name    ;; # list active version
+    --all) nodenv-versions --bare ;; # list all installed versions
+    *)     echo "$@"              ;; # list specififed versions
+  esac
+}
+
+for_versions() {
+  cmd="$1"
+  shift
+
+  for v in $(versions "$@"); do
+    eval $cmd "$(nodenv-prefix "$v")"
+  done
+}
+
+list_hooks() {
+  version_prefix="$1"
+
+  echo $(basename "$version_prefix")
+  if [ -d "$version_prefix/$HOOKS_DIR" ]; then
+    ls "$version_prefix/$HOOKS_DIR"
+  else
+    echo "no hooks installed"
+  fi
+}
+
+install_hooks() {
+  version_prefix="$1"
+
+  mkdir -p "$version_prefix/$HOOKS_DIR"
+
+  # install the postinstall/postuninstall hook scripts by symlinking them
+  REHASH="$PLUGIN_ROOT/libexec/nodenv-rehash.sh"
+
+  ln -nsf "$REHASH" "$version_prefix/$POSTINSTALL_HOOK"
+  ln -nsf "$REHASH" "$version_prefix/$POSTUNINSTALL_HOOK"
+}
+
+uninstall_hooks() {
+  version_prefix="$1"
+
+  # remove postinstall/postuninstall hook scripts
+  if [ -f "$version_prefix/$POSTINSTALL_HOOK" ]; then
+    rm "$version_prefix/$POSTINSTALL_HOOK"
+  fi
+  if [ -f "$version_prefix/$POSTUNINSTALL_HOOK" ]; then
+    rm "$version_prefix/$POSTUNINSTALL_HOOK"
+  fi
+}
+
+cmd="$1"
+shift
+
+case "$cmd" in
+
+  list) for_versions list_hooks "$@" ;;
+
+  install) for_versions install_hooks "$@" ;;
+
+  uninstall) for_versions uninstall_hooks "$@" ;;
+
+  *) ;;
+
+esac

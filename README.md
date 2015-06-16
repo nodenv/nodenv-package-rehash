@@ -1,62 +1,45 @@
-# rbenv-gem-rehash
+# nodenv-package-rehash
 
-**Never run `rbenv rehash` again.** This rbenv plugin automatically
-runs `rbenv rehash` every time you install or uninstall a gem.
+**Never run `nodenv rehash` again.** This nodenv plugin automatically
+runs `nodenv rehash` every time you install or uninstall a global package.
 
 ## Installation
 
-Make sure you have rbenv 0.4.0 or later, then run:
-
-    git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
+    git clone https://github.com/jasonkarns/nodenv-package-rehash.git $(nodenv root)/plugins/nodenv-package-rehash
 
 ## Usage
 
-1. `gem install` a gem that provides executables.
-2. Marvel at how you no longer need to type `rbenv rehash`.
+1. `npm install -g` a package that provides executables.
+2. Marvel at how you no longer need to type `nodenv rehash`.
+
+### Subcommands
+
+Three sub commands are available for manual hook management.
+
+1. `nodenv package-hooks list [version-name... | -all]
+    Lists any hooks installed for the given version(s)
+2. `nodenv package-hooks install [version-name... | -all]
+    Installs postinstall/postuninstall rehash hooks for the given version(s)
+3. `nodenv package-hooks uninstall [version-name... | -all]
+    Uninstalls postinstall/postuninstall rehash hooks for the given version(s)
+
+All three sub commands accept similar arguments:
+
+1. no arg: applies the command only to the currently active node version (regardless how that version is set)
+2. version-name: a whitespace-separate list of 1 or more explicit versions (e.g. 0.10.24)
+3. `--all`: applies the command to all installed versions
+
 
 ## How It Works
 
-rbenv-gem-rehash consists of two parts: a RubyGems plugin and an rbenv
-plugin.
+nodenv-package-rehash consists of two parts: an npm postinstall (and
+postuninstall) hook script and a nodenv plugin.
 
-The RubyGems plugin hooks into the `gem install` and `gem uninstall`
-commands to run `rbenv rehash` afterwards, ensuring newly installed
-gem executables are visible to rbenv.
+The npm script hooks into npm's `postinstall` and `postuninstall` lifecycle
+events (corresponding to `npm install -g` and `npm uninstall -g`) to run
+`nodenv rehash`, ensuring newly installed package executables are visible to
+nodenv.
 
-The rbenv plugin is responsible for making the RubyGems plugin visible
-to RubyGems. It hooks into the `rbenv exec` command that rbenv's shims
-use to invoke Ruby programs and configures the environment so that
-RubyGems can discover the plugin.
-
-## History
-
-**1.0.0** (January 24, 2013)
-
-* Initial public release.
-
-## License
-
-(The MIT License)
-
-Copyright (c) 2013 Sam Stephenson <<sstephenson@gmail.com>>
-
-Copyright (c) 2013 Joshua Peek <<josh@joshpeek.com>>
-
-Permission is hereby granted, free of charge, to any person obtaining
-a copy of this software and associated documentation files (the
-"Software"), to deal in the Software without restriction, including
-without limitation the rights to use, copy, modify, merge, publish,
-distribute, sublicense, and/or sell copies of the Software, and to
-permit persons to whom the Software is furnished to do so, subject to
-the following conditions:
-
-The above copyright notice and this permission notice shall be
-included in all copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
-EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
-MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
-NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
-OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
-WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+The nodenv plugin is responsible for installing the npm hook script. It
+relies on nodenv's `install` hook to copy the hook script into node's global
+`node_modules/hooks`.
