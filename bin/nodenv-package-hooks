@@ -53,8 +53,12 @@ uninstall_hooks() {
   version_prefix="$1"
 
   # remove postinstall/postuninstall hook scripts
-  rm "$version_prefix/$POSTINSTALL_HOOK"
-  rm "$version_prefix/$POSTUNINSTALL_HOOK"
+  if [ -f "$version_prefix/$POSTINSTALL_HOOK" ]; then
+    rm "$version_prefix/$POSTINSTALL_HOOK"
+  fi
+  if [ -f "$version_prefix/$POSTUNINSTALL_HOOK" ]; then
+    rm "$version_prefix/$POSTUNINSTALL_HOOK"
+  fi
 }
 
 cmd="$1"
