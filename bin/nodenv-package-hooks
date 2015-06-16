@@ -9,7 +9,6 @@ POSTINSTALL_HOOK="$HOOKS_DIR/postinstall"
 POSTUNINSTALL_HOOK="$HOOKS_DIR/postuninstall"
 
 
-
 versions() {
   case "$1" in
     "")    nodenv-version-name    ;; # list active version
@@ -23,16 +22,14 @@ for_versions() {
   shift
 
   for v in $(versions "$@"); do
-    local version_prefix="$(nodenv-prefix "$v")"
-    eval $cmd "$version_prefix" "$v"
+    eval $cmd "$(nodenv-prefix "$v")"
   done
 }
 
 list_hooks() {
   version_prefix="$1"
-  version="$2"
 
-  echo $version
+  echo $(basename "$version_prefix")
   if [ -d "$version_prefix/$HOOKS_DIR" ]; then
     ls "$version_prefix/$HOOKS_DIR"
   else
@@ -65,20 +62,12 @@ shift
 
 case "$cmd" in
 
-  list)
+  list) for_versions list_hooks "$@" ;;
 
-    for_versions list_hooks "$@" ;;
+  install) for_versions install_hooks "$@" ;;
 
-  install)
+  uninstall) for_versions uninstall_hooks "$@" ;;
 
-    for_versions install_hooks "$@" ;;
-
-  uninstall)
-
-    for_versions uninstall_hooks "$@" ;;
-
-  *)
-
-    ;;
+  *) ;;
 
 esac
