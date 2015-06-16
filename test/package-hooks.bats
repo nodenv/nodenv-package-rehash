@@ -32,6 +32,17 @@ setup() {
 	OUTPUT
 }
 
+@test "nodenv-package-hooks list <version>" {
+  run nodenv-package-hooks list 0.12
+
+  assert_success
+  assert_output <<-OUTPUT
+		0.12
+		postinstall
+		postuninstall
+	OUTPUT
+}
+
 @test "nodenv-package-hooks list --all" {
   run nodenv-package-hooks list --all
 
@@ -41,17 +52,6 @@ setup() {
 		no hooks installed
 		0.11
 		no hooks installed
-		0.12
-		postinstall
-		postuninstall
-	OUTPUT
-}
-
-@test "nodenv-package-hooks list 0.12" {
-  run nodenv-package-hooks list 0.12
-
-  assert_success
-  assert_output <<-OUTPUT
 		0.12
 		postinstall
 		postuninstall
@@ -68,11 +68,20 @@ setup() {
 }
 
 @test "nodenv-package-hooks install <version>" {
-skip
-  run nodenv-package-hooks install
+  run nodenv-package-hooks install 0.11
 
   assert_success
   refute_package_hooks 0.10
+  assert_package_hooks 0.11
+  assert_package_hooks 0.12
+}
+
+@test "nodenv-package-hooks install --all" {
+  run nodenv-package-hooks install --all
+
+  assert_success
+  assert_package_hooks 0.10
+  assert_package_hooks 0.11
   assert_package_hooks 0.12
 }
 
