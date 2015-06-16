@@ -6,10 +6,11 @@ setup() {
   # two nodes installed (0.10, 0.12)
   create_versions 0.10 0.12
   stub nodenv-versions \
-    "--bare : echo 0.10 0.12"
+    "--bare : echo 0.10 0.11 0.12"
   stub nodenv-prefix \
     "echo $NODENV_ROOT/versions/0.10" \
     "0.10 : echo $NODENV_ROOT/versions/0.10" \
+    "0.11 : echo $NODENV_ROOT/versions/0.11" \
     "0.12 : echo $NODENV_ROOT/versions/0.12"
 
   # 0.10 is active,
@@ -37,6 +38,8 @@ setup() {
   assert_success
   assert_output <<-OUTPUT
 		0.10
+		no hooks installed
+		0.11
 		no hooks installed
 		0.12
 		postinstall
