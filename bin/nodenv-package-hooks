@@ -18,42 +18,56 @@ versions() {
   esac
 }
 
-list_hooks_for() {
-  for v in "$@"; do
-    local version_hooks_dir="$(nodenv-prefix "$v")/$HOOKS_DIR"
+list_hooks_for(){
+  version_prefix="$1"
+  version="$2"
 
-    echo $v
-    if [ -d "$version_hooks_dir" ]; then
-      ls "$version_hooks_dir"
-    else
-      echo "no hooks installed"
-    fi
-  done
+  echo $version
+  if [ -d "$version_prefix/$HOOKS_DIR" ]; then
+    ls "$version_prefix/$HOOKS_DIR"
+  else
+    echo "no hooks installed"
+  fi
 }
 
+list_hooks() {
+  for v in "$@"; do
+    local version_prefix="$(nodenv-prefix "$v")"
+    list_hooks_for $version_prefix $v
+  done
+}
 
 install_hooks_for() {
+  version_prefix="$1"
+
+  mkdir -p "$version_prefix/$HOOKS_DIR"
+
+  # install the postinstall/postuninstall hook scripts by symlinking them
+  REHASH="$PLUGIN_ROOT/libexec/nodenv-rehash.sh"
+
+  ln -nsf "$REHASH" "$version_prefix/$POSTINSTALL_HOOK"
+  ln -nsf "$REHASH" "$version_prefix/$POSTUNINSTALL_HOOK"
+}
+
+install_hooks() {
   for v in "$@"; do
     local version_prefix="$(nodenv-prefix "$v")"
-
-    mkdir -p "$version_prefix/$HOOKS_DIR"
-
-    # install the postinstall/postuninstall hook scripts by symlinking them
-    REHASH="$PLUGIN_ROOT/libexec/nodenv-rehash.sh"
-
-    ln -nsf "$REHASH" "$version_prefix/$POSTINSTALL_HOOK"
-    ln -nsf "$REHASH" "$version_prefix/$POSTUNINSTALL_HOOK"
+    install_hooks_for $version_prefix
   done
 }
 
-
 uninstall_hooks_for() {
+  version_prefix="$1"
+
+  # remove postinstall/postuninstall hook scripts
+  rm "$version_prefix/$POSTINSTALL_HOOK"
+  rm "$version_prefix/$POSTUNINSTALL_HOOK"
+}
+
+uninstall_hooks() {
   for v in "$@"; do
     local version_prefix="$(nodenv-prefix "$v")"
-
-    # remove postinstall/postuninstall hook scripts
-    rm "$version_prefix/$POSTINSTALL_HOOK"
-    rm "$version_prefix/$POSTUNINSTALL_HOOK"
+    uninstall_hooks_for $version_prefix
   done
 }
 
@@ -64,15 +78,15 @@ case "$cmd" in
 
   list)
 
-    list_hooks_for $(versions "$@") ;;
+    list_hooks $(versions "$@") ;;
 
   install)
 
-    install_hooks_for $(versions "$@") ;;
+    install_hooks $(versions "$@") ;;
 
   uninstall)
 
-    uninstall_hooks_for $(versions "$@") ;;
+    uninstall_hooks $(versions "$@") ;;
 
   *)
 
