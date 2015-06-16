@@ -31,22 +31,11 @@ create_versions() {
 
 
 assert_package_hooks() {
-  assert_line FOO
+  assert_line "$1"
 }
 
-assert_line() {
-  if [ "$1" -ge 0 ] 2>/dev/null; then
-    assert_equal "$2" "${lines[$1]}"
-  else
-    local line
-    for line in "${lines[@]}"; do
-      if [ "$line" = "$1" ]; then return 0; fi
-    done
-    flunk <<MSG
-    expected line '$1' in:
-${output}
-MSG
-  fi
+refute_package_hooks() {
+  refute_line "$1"
 }
 
 stub() {
