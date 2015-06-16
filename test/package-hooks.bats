@@ -59,12 +59,12 @@ setup() {
 }
 
 @test "nodenv-package-hooks install" {
-skip
   run nodenv-package-hooks install
 
   assert_success
   assert_package_hooks 0.10
-  # refute_package_hooks 0.12
+  refute_package_hooks 0.11
+  assert_package_hooks 0.12
 }
 
 @test "nodenv-package-hooks install <version>" {

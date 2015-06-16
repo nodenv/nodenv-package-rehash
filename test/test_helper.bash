@@ -31,11 +31,15 @@ create_versions() {
 
 
 assert_package_hooks() {
-  assert_line "$1"
+  version="$1"
+  test -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postinstall"
+  test -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postuninstall"
 }
 
 refute_package_hooks() {
-  refute_line "$1"
+  version="$1"
+  test ! -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postinstall"
+  test ! -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postuninstall"
 }
 
 stub() {

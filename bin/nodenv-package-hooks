@@ -3,7 +3,10 @@
 set -e
 [ -n "$NODENV_DEBUG" ] && set -x
 
-HOOKS_DIR="lib/node_modules/.hooks/"
+PLUGIN_ROOT="${BASH_SOURCE%/*}/.."
+HOOKS_DIR="lib/node_modules/.hooks"
+POSTINSTALL_HOOK="$HOOKS_DIR/postinstall"
+POSTUNINSTALL_HOOK="$HOOKS_DIR/postuninstall"
 
 
 
@@ -17,14 +20,29 @@ versions() {
 
 list_hooks_for() {
   for v in "$@"; do
-    local version_hooks="$(nodenv-prefix "$v")/$HOOKS_DIR"
+    local version_hooks_dir="$(nodenv-prefix "$v")/$HOOKS_DIR"
 
     echo $v
-    if [ -d "$version_hooks" ]; then
-      ls "$version_hooks"
+    if [ -d "$version_hooks_dir" ]; then
+      ls "$version_hooks_dir"
     else
       echo "no hooks installed"
     fi
+  done
+}
+
+
+install_hooks_for() {
+  for v in "$@"; do
+    local version_prefix="$(nodenv-prefix "$v")"
+
+    mkdir -p "$version_prefix/$HOOKS_DIR"
+
+    # install the postinstall/postuninstall hook scripts by symlinking them
+    REHASH="$PLUGIN_ROOT/libexec/nodenv-rehash.sh"
+
+    ln -nsf "$REHASH" "$version_prefix/$POSTINSTALL_HOOK"
+    ln -nsf "$REHASH" "$version_prefix/$POSTUNINSTALL_HOOK"
   done
 }
 
@@ -40,7 +58,7 @@ case "$cmd" in
 
   install)
 
-    ;;
+    install_hooks_for $(versions "$@") ;;
 
   uninstall)
 
