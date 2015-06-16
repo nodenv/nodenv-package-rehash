@@ -18,7 +18,17 @@ versions() {
   esac
 }
 
-list_hooks_for(){
+for_versions() {
+  cmd="$1"
+  shift
+
+  for v in $(versions "$@"); do
+    local version_prefix="$(nodenv-prefix "$v")"
+    eval $cmd "$version_prefix" "$v"
+  done
+}
+
+list_hooks() {
   version_prefix="$1"
   version="$2"
 
@@ -30,14 +40,7 @@ list_hooks_for(){
   fi
 }
 
-list_hooks() {
-  for v in "$@"; do
-    local version_prefix="$(nodenv-prefix "$v")"
-    list_hooks_for $version_prefix $v
-  done
-}
-
-install_hooks_for() {
+install_hooks() {
   version_prefix="$1"
 
   mkdir -p "$version_prefix/$HOOKS_DIR"
@@ -49,26 +52,12 @@ install_hooks_for() {
   ln -nsf "$REHASH" "$version_prefix/$POSTUNINSTALL_HOOK"
 }
 
-install_hooks() {
-  for v in "$@"; do
-    local version_prefix="$(nodenv-prefix "$v")"
-    install_hooks_for $version_prefix
-  done
-}
-
-uninstall_hooks_for() {
+uninstall_hooks() {
   version_prefix="$1"
 
   # remove postinstall/postuninstall hook scripts
   rm "$version_prefix/$POSTINSTALL_HOOK"
   rm "$version_prefix/$POSTUNINSTALL_HOOK"
-}
-
-uninstall_hooks() {
-  for v in "$@"; do
-    local version_prefix="$(nodenv-prefix "$v")"
-    uninstall_hooks_for $version_prefix
-  done
 }
 
 cmd="$1"
@@ -78,15 +67,15 @@ case "$cmd" in
 
   list)
 
-    list_hooks $(versions "$@") ;;
+    for_versions list_hooks "$@" ;;
 
   install)
 
-    install_hooks $(versions "$@") ;;
+    for_versions install_hooks "$@" ;;
 
   uninstall)
 
-    uninstall_hooks $(versions "$@") ;;
+    for_versions uninstall_hooks "$@" ;;
 
   *)
 
