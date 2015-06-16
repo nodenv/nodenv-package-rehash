@@ -47,6 +47,16 @@ install_hooks_for() {
 }
 
 
+uninstall_hooks_for() {
+  for v in "$@"; do
+    local version_prefix="$(nodenv-prefix "$v")"
+
+    # remove postinstall/postuninstall hook scripts
+    rm "$version_prefix/$POSTINSTALL_HOOK"
+    rm "$version_prefix/$POSTUNINSTALL_HOOK"
+  done
+}
+
 cmd="$1"
 shift
 
@@ -62,7 +72,7 @@ case "$cmd" in
 
   uninstall)
 
-    ;;
+    uninstall_hooks_for $(versions "$@") ;;
 
   *)
 

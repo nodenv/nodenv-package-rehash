@@ -2,6 +2,13 @@
 
 load test_helper
 
+stub_hooks_for() {
+  version="$1"
+  mkdir -p $NODENV_ROOT/versions/$version/lib/node_modules/.hooks
+  touch $NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postinstall
+  touch $NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postuninstall
+}
+
 setup() {
   # two nodes installed (0.10, 0.12)
   create_versions 0.10 0.12
@@ -17,9 +24,7 @@ setup() {
   stub nodenv-version-name "echo 0.10"
 
   # only 0.12 has hooks
-  mkdir -p $NODENV_ROOT/versions/0.12/lib/node_modules/.hooks
-  touch $NODENV_ROOT/versions/0.12/lib/node_modules/.hooks/postinstall
-  touch $NODENV_ROOT/versions/0.12/lib/node_modules/.hooks/postuninstall
+  stub_hooks_for 0.12
 }
 
 @test "nodenv-package-hooks list" {
@@ -85,21 +90,39 @@ setup() {
   assert_package_hooks 0.12
 }
 
-# @test "nodenv-package-hooks uninstall" {
-#   create_versions 0.10.36
+@test "nodenv-package-hooks uninstall" {
+  stub_hooks_for 0.10
+  assert_package_hooks 0.10
 
-#   run nodenv-alias name 0.8.5
-#   assert_success
-#   assert_alias_version name 0.8.5
-# }
+  run nodenv-package-hooks uninstall
 
-# @test "nodenv-package-hooks uninstall <version>" {
-#   create_versions 0.10.36
+  assert_success
+  refute_package_hooks 0.10
+  refute_package_hooks 0.11
+  assert_package_hooks 0.12
+}
 
-#   run nodenv-alias --auto
+@test "nodenv-package-hooks uninstall <version>" {
+  stub_hooks_for 0.11
+  assert_package_hooks 0.11
 
-#   assert_success
-#   assert_alias_version 0.8 0.8.10
-#   assert_alias_version 0.10 0.10.23
-#   assert_alias_version iojs-1.10 iojs-1.10.23
-# }
+  run nodenv-package-hooks uninstall 0.11
+
+  assert_success
+  refute_package_hooks 0.10
+  refute_package_hooks 0.11
+  assert_package_hooks 0.12
+}
+
+@test "nodenv-package-hooks uninstall --all" {
+  stub_hooks_for 0.11
+  assert_package_hooks 0.11
+  assert_package_hooks 0.12
+
+  run nodenv-package-hooks uninstall --all
+
+  assert_success
+  refute_package_hooks 0.10
+  refute_package_hooks 0.11
+  refute_package_hooks 0.12
+}
