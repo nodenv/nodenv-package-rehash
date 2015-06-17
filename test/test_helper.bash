@@ -6,9 +6,9 @@ NODENV_TEST_DIR="${BATS_TMPDIR}/nodenv"
 mkdir -p "${NODENV_TEST_DIR}"
 
 export NODENV_ROOT="${NODENV_TEST_DIR}"
-export INSTALL_HOOK="${BATS_TEST_DIRNAME}/../etc/nodenv.d/install/install-hook-scripts.sh"
 
 PATH=/usr/bin:/bin:/usr/sbin:/sbin
+PATH="$BATS_TEST_DIRNAME/helpers/bin:$PATH"
 PATH="$BATS_TEST_DIRNAME/../bin:$PATH"
 PATH="$TMP/bin:$PATH"
 export PATH
