@@ -1,4 +1,16 @@
 #!/usr/bin/env bash
+#
+# Summary: Install npm hooks to automatically rehash after package install/uninstall
+#
+# Usage: nodenv package-hooks list [ --all | <version>...]
+#        nodenv package-hooks install [ --all | <version>...]
+#        nodenv package-hooks uninstall [ --all | <version>...]
+#
+# Install, Uninstall or List npm postinstall/postuninstall hooks.
+# Without arguments, it will list, install or uninstall into the currently
+# active node version. Alternatively, you may provide an explicit list of
+# node versions to list/install/uninstall to. Or, --all will list/install/uninstall
+# against all installed node versions.
 
 set -e
 [ -n "$NODENV_DEBUG" ] && set -x
@@ -62,7 +74,7 @@ uninstall_hooks() {
 }
 
 cmd="$1"
-shift
+set +e; shift; set -e;
 
 case "$cmd" in
 
@@ -72,6 +84,6 @@ case "$cmd" in
 
   uninstall) for_versions uninstall_hooks "$@" ;;
 
-  *) ;;
+  *) nodenv-help package-hooks ;;
 
 esac
