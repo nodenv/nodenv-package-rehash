@@ -17,10 +17,15 @@ runs `nodenv rehash` every time you install or uninstall a global package.
 Three sub commands are available for manual hook management.
 
 1. `nodenv package-hooks list [ --all | <version-name>... ]`
+    
     Lists any hooks installed for the given version(s)
+
 2. `nodenv package-hooks install [ --all | <version-name>... ]`
+    
     Installs postinstall/postuninstall rehash hooks for the given version(s)
+
 3. `nodenv package-hooks uninstall [ --all | <version-name>... ]`
+    
     Uninstalls postinstall/postuninstall rehash hooks for the given version(s)
 
 All three sub commands accept similar arguments:
