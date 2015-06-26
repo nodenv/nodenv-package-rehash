@@ -5,7 +5,14 @@ runs `nodenv rehash` every time you install or uninstall a global package.
 
 ## Installation
 
-    git clone https://github.com/jasonkarns/nodenv-package-rehash.git $(nodenv root)/plugins/nodenv-package-rehash
+Install the plugin:
+
+    git clone https://github.com/jasonkarns/nodenv-package-rehash.git "$(nodenv root)"/plugins/nodenv-package-rehash
+
+Install hooks for your existing nodenv versions.
+(This will be done automatically for any node you install henceforth.)
+
+    nodenv package-hooks install --all
 
 ## Usage
 
@@ -17,15 +24,15 @@ runs `nodenv rehash` every time you install or uninstall a global package.
 Three sub commands are available for manual hook management.
 
 1. `nodenv package-hooks list [ --all | <version-name>... ]`
-    
+
     Lists any hooks installed for the given version(s)
 
 2. `nodenv package-hooks install [ --all | <version-name>... ]`
-    
+
     Installs postinstall/postuninstall rehash hooks for the given version(s)
 
 3. `nodenv package-hooks uninstall [ --all | <version-name>... ]`
-    
+
     Uninstalls postinstall/postuninstall rehash hooks for the given version(s)
 
 All three sub commands accept similar arguments:
