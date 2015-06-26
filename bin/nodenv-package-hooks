@@ -84,6 +84,6 @@ case "$cmd" in
 
   uninstall) for_versions uninstall_hooks "$@" ;;
 
-  *) ;;
+  *) nodenv-help package-hooks ;;
 
 esac
