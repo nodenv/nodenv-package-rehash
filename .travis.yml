@@ -1,0 +1,3 @@
+install: git clone --depth 1 https://github.com/sstephenson/bats.git
+script: ./bats/bin/bats test
+language: c
