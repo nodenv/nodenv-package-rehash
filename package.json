@@ -1,0 +1,34 @@
+{
+  "name": "nodenv-package-rehash",
+  "version": "1.0.1",
+  "private": true,
+  "description": "Never run nodenv rehash again",
+  "homepage": "https://github.com/jasonkarns/nodenv-package-rehash#readme",
+  "author": "Jason Karns <jason@karns.name> (http://jason.karns.name/)",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "bats test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jasonkarns/nodenv-package-rehash.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jasonkarns/nodenv-package-rehash/issues"
+  },
+  "keywords": [
+    "nodenv",
+    "node",
+    "package",
+    "npm",
+    "rehash",
+    "global",
+    "shim"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "tap-spec": "^4.0.2"
+  }
+}
