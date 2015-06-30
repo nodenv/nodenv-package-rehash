@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/jasonkarns/nodenv-package-rehash.svg?branch=master)](https://travis-ci.org/jasonkarns/nodenv-package-rehash)
+
 # nodenv-package-rehash
 
 **Never run `nodenv rehash` again.** This nodenv plugin automatically
