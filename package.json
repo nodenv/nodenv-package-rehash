@@ -29,6 +29,8 @@
   ],
   "license": "MIT",
   "devDependencies": {
+    "bats": "^0.4.2",
+    "bats-assert": "^1.0.1",
     "tap-spec": "^4.0.2"
   }
 }
