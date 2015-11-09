@@ -1,4 +1,4 @@
-load helpers/assertions/all
+load ../node_modules/bats-assert/all
 
 export TMP="$BATS_TEST_DIRNAME/tmp"
 
