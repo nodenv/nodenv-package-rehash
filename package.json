@@ -12,9 +12,6 @@
   "bugs": {
     "url": "https://github.com/jasonkarns/nodenv-package-rehash/issues"
   },
-  "directories": {
-    "test": "test"
-  },
   "scripts": {
     "test": "bats test"
   },
