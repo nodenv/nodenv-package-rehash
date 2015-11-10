@@ -80,7 +80,11 @@ case "$cmd" in
   list | install | uninstall )
     for_versions ${cmd}_hooks "$@"
     ;;
+  help )
+    nodenv-help package-hooks
+    ;;
   *)
-    nodenv-help package-hooks;
+    nodenv-help package-hooks
+    exit 1
     ;;
 esac
