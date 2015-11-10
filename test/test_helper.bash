@@ -28,17 +28,16 @@ create_versions() {
   done
 }
 
-
 assert_package_hooks() {
   version="$1"
-  test -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postinstall"
-  test -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postuninstall"
+  assert [ -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postinstall" ]
+  assert [ -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postuninstall" ]
 }
 
 refute_package_hooks() {
   version="$1"
-  test ! -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postinstall"
-  test ! -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postuninstall"
+  refute [ -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postinstall" ]
+  refute [ -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postuninstall" ]
 }
 
 stub_hooks_for() {
