@@ -5,18 +5,22 @@
   "description": "Never run nodenv rehash again",
   "homepage": "https://github.com/jasonkarns/nodenv-package-rehash#readme",
   "author": "Jason Karns <jason@karns.name> (http://jason.karns.name/)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jasonkarns/nodenv-package-rehash.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jasonkarns/nodenv-package-rehash/issues"
+  },
   "directories": {
     "test": "test"
   },
   "scripts": {
     "test": "bats test"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/jasonkarns/nodenv-package-rehash.git"
-  },
-  "bugs": {
-    "url": "https://github.com/jasonkarns/nodenv-package-rehash/issues"
+  "devDependencies": {
+    "bats": "^0.4.2",
+    "bats-assert": "^1.0.1"
   },
   "keywords": [
     "nodenv",
@@ -27,10 +31,5 @@
     "global",
     "shim"
   ],
-  "license": "MIT",
-  "devDependencies": {
-    "bats": "^0.4.2",
-    "bats-assert": "^1.0.1",
-    "tap-spec": "^4.0.2"
-  }
+  "license": "MIT"
 }
