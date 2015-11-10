@@ -40,3 +40,10 @@ refute_package_hooks() {
   test ! -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postinstall"
   test ! -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postuninstall"
 }
+
+stub_hooks_for() {
+  version="$1"
+  mkdir -p $NODENV_ROOT/versions/$version/lib/node_modules/.hooks
+  touch $NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postinstall
+  touch $NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postuninstall
+}
