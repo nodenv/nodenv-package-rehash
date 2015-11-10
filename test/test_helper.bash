@@ -12,6 +12,11 @@ PATH="$BATS_TEST_DIRNAME/../bin:$PATH"
 PATH="$BATS_MOCK_BINDIR:$PATH"
 export PATH
 
+hookdir() {
+  local version=$1
+  echo "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks"
+}
+
 teardown() {
   rm -rf "$NODENV_TEST_DIR"
   rm -rf "$BATS_MOCK_TMPDIR"
@@ -29,20 +34,20 @@ create_versions() {
 }
 
 assert_package_hooks() {
-  version="$1"
-  assert [ -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postinstall" ]
-  assert [ -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postuninstall" ]
+  local version="$1"
+  assert [ -f "$(hookdir $version)/postinstall" ]
+  assert [ -f "$(hookdir $version)/postuninstall" ]
 }
 
 refute_package_hooks() {
-  version="$1"
-  refute [ -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postinstall" ]
-  refute [ -f "$NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postuninstall" ]
+  local version="$1"
+  refute [ -f "$(hookdir $version)/postinstall" ]
+  refute [ -f "$(hookdir $version)/postuninstall" ]
 }
 
 stub_hooks_for() {
-  version="$1"
-  mkdir -p $NODENV_ROOT/versions/$version/lib/node_modules/.hooks
-  touch $NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postinstall
-  touch $NODENV_ROOT/versions/$version/lib/node_modules/.hooks/postuninstall
+  local version="$1"
+  mkdir -p $(hookdir $version)
+  touch $(hookdir $version)/postinstall
+  touch $(hookdir $version)/postuninstall
 }
