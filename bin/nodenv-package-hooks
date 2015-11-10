@@ -74,7 +74,7 @@ uninstall_hooks() {
 }
 
 cmd="$1"
-set +e; shift; set -e;
+shift || true
 
 case "$cmd" in
   list | install | uninstall )
