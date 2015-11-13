@@ -82,6 +82,8 @@ case "$cmd" in
     echo list
     echo install
     echo uninstall
+    echo --all
+    nodenv-versions --bare
     ;;
   list | install | uninstall )
     for_versions ${cmd}_hooks "$@"
