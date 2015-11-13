@@ -80,6 +80,14 @@ case "$cmd" in
   list | install | uninstall )
     for_versions ${cmd}_hooks "$@"
     ;;
+# Provide nodenv completions
+  --complete )
+    echo list
+    echo install
+    echo uninstall
+    echo --all
+    nodenv-versions --bare
+    ;;
   help )
     nodenv-help package-hooks
     ;;
