@@ -77,6 +77,9 @@ cmd="$1"
 shift || true
 
 case "$cmd" in
+  list | install | uninstall )
+    for_versions ${cmd}_hooks "$@"
+    ;;
 # Provide nodenv completions
   --complete )
     echo list
@@ -84,9 +87,6 @@ case "$cmd" in
     echo uninstall
     echo --all
     nodenv-versions --bare
-    ;;
-  list | install | uninstall )
-    for_versions ${cmd}_hooks "$@"
     ;;
   help )
     nodenv-help package-hooks
