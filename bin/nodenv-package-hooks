@@ -34,14 +34,15 @@ for_versions() {
   shift
 
   for v in $(versions "$@"); do
-    eval $cmd "$(nodenv-prefix "$v")"
+    eval "$cmd" "$(nodenv-prefix "$v")"
   done
 }
 
 list_hooks() {
   version_prefix="$1"
 
-  echo $(basename "$version_prefix")
+  basename "$version_prefix"
+
   if [ -d "$version_prefix/$HOOKS_DIR" ]; then
     ls "$version_prefix/$HOOKS_DIR"
   else
@@ -78,7 +79,7 @@ shift || true
 
 case "$cmd" in
   list | install | uninstall )
-    for_versions ${cmd}_hooks "$@"
+    for_versions "${cmd}_hooks" "$@"
     ;;
 # Provide nodenv completions
   --complete )
