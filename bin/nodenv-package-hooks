@@ -56,7 +56,7 @@ install_hooks() {
   mkdir -p "$version_prefix/$HOOKS_DIR"
 
   # install the postinstall/postuninstall hook scripts by symlinking them
-  REHASH="$PLUGIN_ROOT/libexec/nodenv-rehash.sh"
+  REHASH="$PLUGIN_ROOT/libexec/nodenv-rehash"
 
   ln -nsf "$REHASH" "$version_prefix/$POSTINSTALL_HOOK"
   ln -nsf "$REHASH" "$version_prefix/$POSTUNINSTALL_HOOK"

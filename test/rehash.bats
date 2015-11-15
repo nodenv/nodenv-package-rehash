@@ -7,7 +7,7 @@ load test_helper
   export npm_package_name=lineman
   export npm_config_argv='{"remain":["lineman"],"cooked":["i","--global","lineman"],"original":["i","-g","lineman"]}'
 
-  run ./libexec/nodenv-rehash.sh
+  run ./libexec/nodenv-rehash
 
   assert_success
   assert_output "rehashing"
@@ -19,7 +19,7 @@ load test_helper
   export npm_package_name=grunt
   export npm_config_argv='{"remain":["lineman"],"cooked":["i","--global","lineman"],"original":["i","-g","lineman"]}'
 
-  run ./libexec/nodenv-rehash.sh
+  run ./libexec/nodenv-rehash
 
   assert_success
   assert_output ""
