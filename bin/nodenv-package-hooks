@@ -89,11 +89,11 @@ case "$cmd" in
     echo --all
     nodenv-versions --bare
     ;;
-  help )
-    nodenv-help package-hooks
+  --help )
+    nodenv-help --usage package-hooks
     ;;
   *)
-    nodenv-help package-hooks
+    nodenv-help --usage package-hooks
     exit 1
     ;;
 esac
