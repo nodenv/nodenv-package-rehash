@@ -19,6 +19,7 @@ hookdir() {
 
 teardown() {
   rm -rf "$NODENV_TEST_DIR"
+  rm -rf "$BATS_MOCK_TMPDIR"
 }
 
 # Creates fake version directories
