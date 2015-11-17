@@ -90,7 +90,7 @@ case "$cmd" in
     nodenv-versions --bare
     ;;
   --help )
-    nodenv-help --usage package-hooks
+    exec nodenv-help package-hooks
     ;;
   *)
     nodenv-help --usage package-hooks
