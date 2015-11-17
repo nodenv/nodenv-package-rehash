@@ -74,13 +74,9 @@ uninstall_hooks() {
   fi
 }
 
-cmd="$1"
-shift || true
+unset cmd
 
-case "$cmd" in
-  list | install | uninstall )
-    for_versions "${cmd}_hooks" "$@"
-    ;;
+case "$1" in
 # Provide nodenv completions
   --complete )
     echo list
@@ -88,6 +84,11 @@ case "$cmd" in
     echo uninstall
     echo --all
     nodenv-versions --bare
+    exit
+    ;;
+  list | install | uninstall )
+    cmd="$1"
+    shift
     ;;
   --help )
     exec nodenv-help package-hooks
@@ -97,3 +98,5 @@ case "$cmd" in
     exit 1
     ;;
 esac
+
+for_versions "${cmd}_hooks" "$@"
