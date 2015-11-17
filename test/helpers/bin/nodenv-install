@@ -33,8 +33,13 @@ case "$1" in
     echo "Installed fake version $VERSION_NAME"
     echo "into $d directory"
     ;;
+  fail)
+    STATUS=1
+    VERSION_NAME=$2
+    echo "Failed installation of $2"
+    ;;
   *)
-    echo 'Usage: nodenv-install version'
+    echo 'Usage: nodenv-install [fail] version'
     exit 1
     ;;
 esac

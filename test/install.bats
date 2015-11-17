@@ -13,3 +13,12 @@ export INSTALL_HOOK="${BATS_TEST_DIRNAME}/../etc/nodenv.d/install/install-pkg-ho
   assert_line 'Installed postinstall/postuninstall package hooks for 0.10.36'
   assert_package_hooks 0.10.36
 }
+
+@test "a failed nodenv-install exits hook script gracefully" {
+  run nodenv-install fail 0.10.36
+
+  assert_failure
+  assert_line 'Failed installation of 0.10.36'
+  refute_line 'Installed postinstall/postuninstall package hooks for 0.10.36'
+  refute_package_hooks 0.10.36
+}
