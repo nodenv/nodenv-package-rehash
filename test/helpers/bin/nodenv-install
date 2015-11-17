@@ -24,22 +24,21 @@ then
   source "$INSTALL_HOOK"
 fi
 
-STATUS=0
-
 case "$1" in
   *[0-9].*)
+    STATUS=0
     VERSION_NAME=$1
-    d="$NODENV_ROOT/versions/$1"
+    d="$NODENV_ROOT/versions/$VERSION_NAME"
     mkdir -p "$d"
-    echo "Installed fake version $1"
+    echo "Installed fake version $VERSION_NAME"
     echo "into $d directory"
-
-    echo Executing after_install hooks.
-    for hook in "${after_hooks[@]}"; do eval "$hook"; done
-
     ;;
   *)
     echo 'Usage: nodenv-install version'
+    exit 1
     ;;
 esac
+
+echo Executing after_install hooks.
+for hook in "${after_hooks[@]}"; do eval "$hook"; done
 exit $STATUS
