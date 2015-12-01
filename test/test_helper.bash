@@ -1,3 +1,4 @@
+BATS_TMPDIR=test/tmp
 load ../node_modules/bats-assert/all
 load ../node_modules/bats-mock/stub
 
