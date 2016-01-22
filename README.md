@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/jasonkarns/nodenv-package-rehash.svg?branch=master)](https://travis-ci.org/jasonkarns/nodenv-package-rehash)
+[![Build Status](https://travis-ci.org/nodenv/nodenv-package-rehash.svg?branch=master)](https://travis-ci.org/nodenv/nodenv-package-rehash)
 
 # nodenv-package-rehash
 
@@ -9,7 +9,7 @@ runs `nodenv rehash` every time you install or uninstall a global package.
 
 Install the plugin:
 
-    git clone https://github.com/jasonkarns/nodenv-package-rehash.git "$(nodenv root)"/plugins/nodenv-package-rehash
+    git clone https://github.com/nodenv/nodenv-package-rehash.git "$(nodenv root)"/plugins/nodenv-package-rehash
 
 Install hooks for your existing nodenv versions.
 (This will be done automatically for any node you install henceforth.)
