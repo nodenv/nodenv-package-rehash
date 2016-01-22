@@ -3,14 +3,14 @@
   "version": "1.2.0",
   "private": true,
   "description": "Never run nodenv rehash again",
-  "homepage": "https://github.com/jasonkarns/nodenv-package-rehash#readme",
+  "homepage": "https://github.com/nodenv/nodenv-package-rehash#readme",
   "author": "Jason Karns <jason@karns.name> (http://jason.karns.name/)",
   "repository": {
     "type": "git",
-    "url": "https://github.com/jasonkarns/nodenv-package-rehash.git"
+    "url": "https://github.com/nodenv/nodenv-package-rehash.git"
   },
   "bugs": {
-    "url": "https://github.com/jasonkarns/nodenv-package-rehash/issues"
+    "url": "https://github.com/nodenv/nodenv-package-rehash/issues"
   },
   "scripts": {
     "test": "bats test"
