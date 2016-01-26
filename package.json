@@ -4,13 +4,19 @@
   "private": true,
   "description": "Never run nodenv rehash again",
   "homepage": "https://github.com/nodenv/nodenv-package-rehash#readme",
-  "author": "Jason Karns <jason@karns.name> (http://jason.karns.name/)",
+  "license": "MIT",
+  "author": "Jason Karns <jason@karns.name> (http://jason.karns.name)",
   "repository": {
     "type": "git",
     "url": "https://github.com/nodenv/nodenv-package-rehash.git"
   },
   "bugs": {
     "url": "https://github.com/nodenv/nodenv-package-rehash/issues"
+  },
+  "directories": {
+    "bin": "bin",
+    "lib": "libexec",
+    "test": "test"
   },
   "scripts": {
     "test": "bats test"
@@ -28,6 +34,5 @@
     "rehash",
     "global",
     "shim"
-  ],
-  "license": "MIT"
+  ]
 }
