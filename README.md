@@ -57,3 +57,9 @@ nodenv.
 The nodenv plugin is responsible for installing the npm hook script. It
 relies on nodenv's `install` hook to copy the hook script into node's global
 `node_modules/hooks`.
+
+## Credits
+
+Forked from [Joshua Peek](https://github.com/josh)'s
+[rbenv-gem-rehash](https://github.com/rbenv/rbenv-gem-rehash) by 
+[Jason Karns](https://github.com/jasonkarns) and modified for nodenv.
