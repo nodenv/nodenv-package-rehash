@@ -4,7 +4,11 @@
   "private": true,
   "description": "Never run nodenv rehash again",
   "homepage": "https://github.com/nodenv/nodenv-package-rehash#readme",
-  "author": "Jason Karns <jason@karns.name> (http://jason.karns.name/)",
+  "license": "MIT",
+  "author": "Joshua Peek <josh@joshpeek.com> (https://twitter.com/joshpeekkk)",
+  "contributors": [
+    "Jason Karns <jason@karns.name> (http://jason.karns.name)"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/nodenv/nodenv-package-rehash.git"
@@ -12,22 +16,20 @@
   "bugs": {
     "url": "https://github.com/nodenv/nodenv-package-rehash/issues"
   },
+  "directories": {
+    "bin": "bin",
+    "lib": "libexec",
+    "test": "test"
+  },
   "scripts": {
-    "test": "bats test"
+    "test": "bats ${CI:+--tap} test",
+    "publish:brew": "brew-publish $npm_package_name v$npm_package_version",
+    "postversion": "git push origin master v$npm_package_version && npm run publish:brew"
   },
   "devDependencies": {
     "bats": "^0.4.2",
     "bats-assert": "^1.0.1",
-    "bats-mock": "^1.0.1"
-  },
-  "keywords": [
-    "nodenv",
-    "node",
-    "package",
-    "npm",
-    "rehash",
-    "global",
-    "shim"
-  ],
-  "license": "MIT"
+    "bats-mock": "^1.0.1",
+    "brew-publish": "git+https://github.com/jasonkarns/brew-publish.git#nodenv-tap"
+  }
 }
