@@ -90,9 +90,6 @@ case "$1" in
     cmd="$1"
     shift
     ;;
-  --help )
-    exec nodenv-help package-hooks
-    ;;
   *)
     nodenv-help --usage package-hooks
     exit 1
