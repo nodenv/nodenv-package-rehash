@@ -53,7 +53,7 @@ list_hooks() {
 install_hooks() {
   version_prefix="$1"
 
-  mkdir -p "$version_prefix/$HOOKS_DIR"
+  mkdir -p "${version_prefix?needs set}/$HOOKS_DIR"
 
   # install the postinstall/postuninstall hook scripts by symlinking them
   REHASH="$PLUGIN_ROOT/libexec/nodenv-rehash"
