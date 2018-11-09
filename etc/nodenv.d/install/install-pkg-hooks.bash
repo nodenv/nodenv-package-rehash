@@ -1,3 +1,5 @@
+# shellcheck shell=bash
+
 after_install install_hook_scripts
 
 install_hook_scripts() {
