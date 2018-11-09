@@ -27,8 +27,7 @@ teardown() {
 
 # Creates fake version directories
 create_versions() {
-  for v in $*
-  do
+  for v in "$@"; do
     echo "Created version: $v"
     d="$NODENV_TEST_DIR/versions/$v"
     mkdir -p "$d/bin"
@@ -38,19 +37,19 @@ create_versions() {
 
 assert_package_hooks() {
   local version="$1"
-  assert [ -f "$(hookdir $version)/postinstall" ]
-  assert [ -f "$(hookdir $version)/postuninstall" ]
+  assert [ -f "$(hookdir "$version")/postinstall" ]
+  assert [ -f "$(hookdir "$version")/postuninstall" ]
 }
 
 refute_package_hooks() {
   local version="$1"
-  refute [ -f "$(hookdir $version)/postinstall" ]
-  refute [ -f "$(hookdir $version)/postuninstall" ]
+  refute [ -f "$(hookdir "$version")/postinstall" ]
+  refute [ -f "$(hookdir "$version")/postuninstall" ]
 }
 
 stub_hooks_for() {
   local version="$1"
-  mkdir -p $(hookdir $version)
-  touch $(hookdir $version)/postinstall
-  touch $(hookdir $version)/postuninstall
+  mkdir -p "$(hookdir "$version")"
+  touch "$(hookdir "$version")"/postinstall
+  touch "$(hookdir "$version")"/postuninstall
 }
