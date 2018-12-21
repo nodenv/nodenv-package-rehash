@@ -16,6 +16,16 @@ Install hooks for your existing nodenv versions.
 
     nodenv package-hooks install --all
 
+### Tweak nodenv installation _(optional)_
+
+With this plugin, rehashing will happen on-demand (when global npm modules are installed/uninstalled).
+You can take advantage of this and remove nodenv's _automatic_ hashing upon [shell initialization](https://github.com/nodenv/nodenv#how-nodenv-hooks-into-your-shell).
+In your shell startup file (`.bash_profile`, `.bashrc`, or `.zshrc`), add the `--no-rehash` flag to the `nodenv init -` invocation:
+
+    eval "$(nodenv init - --no-rehash)"
+    
+This will speed up your shell initialization since nodenv will no longer need to rehash on every startup.
+    
 ## Usage
 
 1. `npm install -g` a package that provides executables.
