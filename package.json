@@ -1,13 +1,12 @@
 {
-  "name": "nodenv-package-rehash",
+  "name": "@nodenv/nodenv-package-rehash",
   "version": "1.2.0",
-  "private": true,
   "description": "Never run nodenv rehash again",
   "homepage": "https://github.com/nodenv/nodenv-package-rehash#readme",
   "license": "MIT",
-  "author": "Joshua Peek <josh@joshpeek.com> (https://twitter.com/joshpeekkk)",
   "contributors": [
-    "Jason Karns <jason@karns.name> (http://jason.karns.name)"
+    "Jason Karns <jason@karns.name> (http://jason.karns.name)",
+    "Joshua Peek <josh@joshpeek.com> (https://twitter.com/joshpeekkk)"
   ],
   "repository": {
     "type": "git",
@@ -22,11 +21,14 @@
     "test": "test"
   },
   "scripts": {
+    "start": "npm-packages-rehash",
     "test": "bats ${CI:+--tap} test",
     "posttest": "npm run lint",
     "lint": "git ls-files bin etc libexec test/*.bash | xargs shellcheck",
-    "publish:brew": "brew-publish $npm_package_name v$npm_package_version",
-    "postversion": "git push --follow-tags && npm run publish:brew"
+    "postversion": "npm publish",
+    "prepublishOnly": "npm run publish:github && npm run publish:brew",
+    "publish:brew": "brew-publish",
+    "publish:github": "git push --follow-tags"
   },
   "devDependencies": {
     "bats": "^1.1.0",
