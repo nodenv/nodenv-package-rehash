@@ -24,8 +24,10 @@
     "test": "bats ${CI:+--tap} test",
     "posttest": "npm run lint",
     "lint": "git ls-files bin etc libexec test/*.bash | xargs shellcheck",
-    "publish:brew": "brew-publish $npm_package_name v$npm_package_version",
-    "postversion": "git push --follow-tags && npm run publish:brew"
+    "postversion": "npm publish",
+    "prepublishOnly": "npm run publish:github && npm run publish:brew",
+    "publish:brew": "brew-publish",
+    "publish:github": "git push --follow-tags"
   },
   "devDependencies": {
     "bats": "^1.1.0",
