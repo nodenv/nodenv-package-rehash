@@ -4,9 +4,9 @@
   "description": "Never run nodenv rehash again",
   "homepage": "https://github.com/nodenv/nodenv-package-rehash#readme",
   "license": "MIT",
-  "author": "Joshua Peek <josh@joshpeek.com> (https://twitter.com/joshpeekkk)",
   "contributors": [
-    "Jason Karns <jason@karns.name> (http://jason.karns.name)"
+    "Jason Karns <jason@karns.name> (http://jason.karns.name)",
+    "Joshua Peek <josh@joshpeek.com> (https://twitter.com/joshpeekkk)"
   ],
   "repository": {
     "type": "git",
