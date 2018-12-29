@@ -1,3 +1,4 @@
 node_modules/
 /package-lock.json
 /yarn.lock
+/nodenv-nodenv-package-rehash-*.tgz
