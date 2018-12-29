@@ -22,5 +22,5 @@ load test_helper
   run ./libexec/nodenv-rehash
 
   assert_success
-  assert_output ""
+  refute_output
 }
