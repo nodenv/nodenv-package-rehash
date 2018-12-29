@@ -21,7 +21,7 @@ setup() {
   run nodenv-package-hooks list
 
   assert_success
-  assert_output <<-OUTPUT
+  assert_output - <<-OUTPUT
 		0.10
 		no hooks installed
 	OUTPUT
@@ -33,7 +33,7 @@ setup() {
   run nodenv-package-hooks list 0.12
 
   assert_success
-  assert_output <<-OUTPUT
+  assert_output - <<-OUTPUT
 		0.12
 		postinstall
 		postuninstall
@@ -50,7 +50,7 @@ setup() {
   run nodenv-package-hooks list --all
 
   assert_success
-  assert_output <<-OUTPUT
+  assert_output - <<-OUTPUT
 		0.8
 		no hooks installed
 		0.10

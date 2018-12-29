@@ -20,6 +20,11 @@
     "lib": "libexec",
     "test": "test"
   },
+  "files": [
+    "bin",
+    "etc",
+    "libexec"
+  ],
   "scripts": {
     "start": "npm-packages-rehash",
     "test": "bats ${CI:+--tap} test",
