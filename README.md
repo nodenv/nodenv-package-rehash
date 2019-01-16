@@ -27,7 +27,7 @@ Install hooks for your existing nodenv versions.
 
     nodenv package-hooks install --all
 
-### Tweak nodenv installation _(optional)_
+### Tweak nodenv installation *(optional)*
 
 With this plugin, rehashing will happen on-demand (when global npm modules are installed/uninstalled).
 You can take advantage of this and remove nodenv's _automatic_ hashing upon [shell initialization](https://github.com/nodenv/nodenv#how-nodenv-hooks-into-your-shell).
