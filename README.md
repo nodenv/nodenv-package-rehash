@@ -5,6 +5,8 @@
 **Never run `nodenv rehash` again.** This nodenv plugin automatically
 runs `nodenv rehash` every time you install or uninstall a global package.
 
+<!-- toc -->
+
 ## Installation
 
 Install the plugin:
