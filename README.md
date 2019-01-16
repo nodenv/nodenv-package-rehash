@@ -7,6 +7,15 @@ runs `nodenv rehash` every time you install or uninstall a global package.
 
 <!-- toc -->
 
+- [Installation](#installation)
+  * [Tweak nodenv installation _(optional)_](#tweak-nodenv-installation-_optional_)
+- [Usage](#usage)
+  * [Subcommands](#subcommands)
+- [How It Works](#how-it-works)
+- [Credits](#credits)
+
+<!-- tocstop -->
+
 ## Installation
 
 Install the plugin:
