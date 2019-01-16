@@ -5,6 +5,17 @@
 **Never run `nodenv rehash` again.** This nodenv plugin automatically
 runs `nodenv rehash` every time you install or uninstall a global package.
 
+<!-- toc -->
+
+- [Installation](#installation)
+  * [Tweak nodenv installation *(optional)*](#tweak-nodenv-installation-optional)
+- [Usage](#usage)
+  * [Subcommands](#subcommands)
+- [How It Works](#how-it-works)
+- [Credits](#credits)
+
+<!-- tocstop -->
+
 ## Installation
 
 Install the plugin:
@@ -16,7 +27,7 @@ Install hooks for your existing nodenv versions.
 
     nodenv package-hooks install --all
 
-### Tweak nodenv installation _(optional)_
+### Tweak nodenv installation *(optional)*
 
 With this plugin, rehashing will happen on-demand (when global npm modules are installed/uninstalled).
 You can take advantage of this and remove nodenv's _automatic_ hashing upon [shell initialization](https://github.com/nodenv/nodenv#how-nodenv-hooks-into-your-shell).
