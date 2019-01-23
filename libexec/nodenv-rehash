@@ -1,9 +1,24 @@
 #!/usr/bin/env bash
 
-main_package() {
-  local current_package='\["'${npm_package_name:?}'("\]|@)'
+: "${npm_config_argv:=}"
+: "${npm_package_name:=}"
 
-  [[ ${npm_config_argv:?} =~ $current_package ]]
+warn() {
+  echo "${1:-$(cat -)}" >&2
+}
+
+error() {
+  warn "nodenv-package-rehash: $1"
+}
+
+main_package() {
+  if [ -z "$npm_package_name" ] || [ -z "$npm_config_argv" ]; then
+    error "can't determine target package"
+    return 0 # still rehash by default
+  fi
+
+  local current_package='\["'$npm_package_name'("\]|@)'
+  [[ $npm_config_argv =~ $current_package ]]
 }
 
 # This hook gets invoked when installing dependencies, too, but

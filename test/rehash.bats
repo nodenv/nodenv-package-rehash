@@ -7,7 +7,7 @@ libexec=${BATS_TEST_DIRNAME}/../libexec
 fake_env_for_npm() {
   export npm_lifecycle_event=post$1
   export npm_package_name=$2
-  export npm_package_version=$3
+  export npm_package_version=${3-latest}
 
   local p=$2${3+@$3}
   export npm_config_argv='{"remain":["'$p'"],"cooked":["i","--global","'$p'"],"original":["i","-g","'$p'"]}'
@@ -61,5 +61,16 @@ fake_env_for_npm() {
   run ./libexec/nodenv-rehash
 
   assert_success
+  unstub nodenv
+}
+
+@test "npm hook still rehashes and exits cleanly when missing vars" {
+  stub nodenv 'rehash : true'
+  unset npm_package_name npm_package_version npm_config_argv
+
+  run ./libexec/nodenv-rehash
+
+  assert_success
+  assert_line "nodenv-package-rehash: can't determine target package"
   unstub nodenv
 }
