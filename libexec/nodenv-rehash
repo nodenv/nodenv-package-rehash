@@ -2,6 +2,7 @@
 
 : "${npm_config_argv:=}"
 : "${npm_package_name:=}"
+: "${npm_package_version:=}"
 
 warn() {
   echo "${1-$(cat -)}" >&2
@@ -21,11 +22,35 @@ main_package() {
   [[ $npm_config_argv =~ $current_package ]]
 }
 
+installing_npm() {
+  test "$npm_package_name" = npm
+}
+
+buggy_npm_version() {
+  # 5.1.0 - 6.0.1
+  local buggy_versions='^(5\.[1-9]|6\.0)'
+  [[ "$npm_package_version" =~ $buggy_versions ]]
+}
+
+
 # This hook gets invoked when installing dependencies, too, but
 # we only care about the "main" package installed specifically by the user.
 # That way we only rehash once for a global install, not hundreds of times.
 if ! main_package; then
   exit
+fi
+
+if installing_npm && buggy_npm_version; then
+  warn <<-MSG
+
+		WARNING: Automatic rehashing provided by nodenv-package-rehash will not work
+		for this version of npm since it doesn't execute global hooks.
+		You will need to install a version of npm <5.1.0 || >=6.1.0.
+		    npm i -g npm@latest
+		Otherwise, you will need to run \`nodenv rehash' manually after installing
+		global packages. see https://github.com/nodenv/nodenv-package-rehash/issues/22
+
+MSG
 fi
 
 nodenv rehash || error "error rehashing; manual \`nodenv rehash' likely needed"
