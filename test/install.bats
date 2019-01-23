@@ -22,3 +22,17 @@ load test_helper
   refute_line 'Installed postinstall/postuninstall package hooks for 0.10.36'
   refute_package_hooks 0.10.36
 }
+
+@test "installing a node with buggy npm (8.2.0-10.2.1) emits warning" {
+  run nodenv install 8.2.0
+
+  assert_success
+  assert_line "(This node bundles a buggy npm that doesn't execute global hooks.)"
+}
+
+@test "installing a node with non-buggy npm (8.2.0-10.2.1) doesn't emit warning" {
+  run nodenv install 10.3.0
+
+  assert_success
+  refute_line -p "buggy npm"
+}
