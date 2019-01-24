@@ -4,7 +4,7 @@
 : "${npm_package_name:=}"
 
 warn() {
-  echo "${1:-$(cat -)}" >&2
+  echo "${1-$(cat -)}" >&2
 }
 
 error() {
@@ -28,4 +28,5 @@ if ! main_package; then
   exit
 fi
 
-nodenv rehash
+nodenv rehash || error "error rehashing; manual \`nodenv rehash' likely needed"
+exit 0

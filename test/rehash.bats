@@ -71,6 +71,17 @@ fake_env_for_npm() {
   run ./libexec/nodenv-rehash
 
   assert_success
-  assert_line "nodenv-package-rehash: can't determine target package"
+  assert_output "nodenv-package-rehash: can't determine target package"
+  unstub nodenv
+}
+
+@test "npm hook exits cleanly even if nodenv-rehash errors" {
+  stub nodenv 'rehash : false'
+  fake_env_for_npm install teenytest
+
+  run ./libexec/nodenv-rehash
+
+  assert_success
+  assert_output "nodenv-package-rehash: error rehashing; manual \`nodenv rehash' likely needed"
   unstub nodenv
 }
