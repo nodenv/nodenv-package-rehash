@@ -3,6 +3,7 @@
 : "${npm_config_argv:=}"
 : "${npm_package_name:=}"
 : "${npm_package_version:=}"
+: "${npm_lifecycle_event:=}"
 
 warn() {
   echo "${1-$(cat -)}" >&2
@@ -23,7 +24,7 @@ main_package() {
 }
 
 installing_npm() {
-  test "$npm_package_name" = npm
+  [ "$npm_package_name" = npm ] && [ "$npm_lifecycle_event" = postinstall ]
 }
 
 buggy_npm_version() {

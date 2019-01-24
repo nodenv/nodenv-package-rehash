@@ -107,3 +107,14 @@ fake_env_for_npm() {
   refute_line -p "WARNING: Automatic rehashing"
   unstub nodenv
 }
+
+@test "npm hook doesn't warn when _uninstalling_ npm" {
+  stub nodenv 'rehash : true'
+  fake_env_for_npm uninstall npm 5.10.0
+
+  run $libexec/nodenv-rehash
+
+  assert_success
+  refute_line -p "WARNING: Automatic rehashing"
+  unstub nodenv
+}
