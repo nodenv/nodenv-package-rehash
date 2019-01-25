@@ -1,8 +1,15 @@
 #!/usr/bin/env bash
 
-current_package='\["'${npm_package_name:?}'("\]|@)'
+main_package() {
+  local current_package='\["'${npm_package_name:?}'("\]|@)'
 
-if [[ ! ${npm_config_argv:?} =~ $current_package ]]; then
+  [[ ${npm_config_argv:?} =~ $current_package ]]
+}
+
+# This hook gets invoked when installing dependencies, too, but
+# we only care about the "main" package installed specifically by the user.
+# That way we only rehash once for a global install, not hundreds of times.
+if ! main_package; then
   exit
 fi
 
