@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
 #
-# Summary: Fake install program
+# Summary: Fake install program to run hooks under realistic environment
 #
-# Usage: nodenv install version
-#
+# Usage:
+#   nodenv-install <version>        # fakes a succesful installation of <version>
+#   nodenv-install fail <version>   # fakes a failed installation of <version>
 
 set -e
 [ -n "$NODENV_DEBUG" ] && set -x
@@ -18,11 +19,11 @@ after_install() {
   after_hooks["${#after_hooks[@]}"]="$hook"
 }
 
-if [ -n "$INSTALL_HOOK" ]
-then
-  echo Sourcing "$INSTALL_HOOK"
-  source "$INSTALL_HOOK"
-fi
+for script in "${NODENV_HOOK_PATH%%:*}"/install/*.bash; do
+  echo Sourcing "$script"
+  # shellcheck disable=1090
+  source "$script"
+done
 
 case "$1" in
   *[0-9].*)
@@ -39,7 +40,7 @@ case "$1" in
     echo "Failed installation of $2"
     ;;
   *)
-    echo 'Usage: nodenv-install [fail] version'
+    echo 'Usage: nodenv-install [fail] <version>'
     exit 1
     ;;
 esac
