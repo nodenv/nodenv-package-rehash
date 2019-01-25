@@ -14,13 +14,12 @@ fake_env_for_npm() {
 }
 
 @test "npm hook rehashes for the 'main' package" {
-  stub nodenv 'rehash : echo rehashing'
+  stub nodenv 'rehash : true'
   fake_env_for_npm install lineman
 
   run $libexec/nodenv-rehash
 
   assert_success
-  assert_output "rehashing"
   unstub nodenv
 }
 
@@ -36,34 +35,31 @@ fake_env_for_npm() {
 }
 
 @test "npm hook handles installs specifying version or dist-tag" {
-  stub nodenv 'rehash : echo "rehashing"'
+  stub nodenv 'rehash : true'
   fake_env_for_npm install testdouble latest
 
   run ./libexec/nodenv-rehash
 
   assert_success
-  assert_output "rehashing"
   unstub nodenv
 }
 
 @test "npm hook handles package with @org scope" {
-  stub nodenv 'rehash : echo "rehashing"'
+  stub nodenv 'rehash : true'
   fake_env_for_npm install @org/testdouble
 
   run ./libexec/nodenv-rehash
 
   assert_success
-  assert_output "rehashing"
   unstub nodenv
 }
 
 @test "npm hook handles package with @org scope and version/dist-tag" {
-  stub nodenv 'rehash : echo "rehashing"'
+  stub nodenv 'rehash : true'
   fake_env_for_npm install @org/testdouble latest
 
   run ./libexec/nodenv-rehash
 
   assert_success
-  assert_output "rehashing"
   unstub nodenv
 }
