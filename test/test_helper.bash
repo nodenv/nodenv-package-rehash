@@ -6,16 +6,20 @@ load '../node_modules/bats-assert/load'
 
 load ../node_modules/bats-mock/stub
 
-NODENV_TEST_DIR="${BATS_TMPDIR}/nodenv"
-mkdir -p "${NODENV_TEST_DIR}"
-
-export NODENV_ROOT="${NODENV_TEST_DIR}"
+# common nodenv setup
+unset NODENV_VERSION NODENV_DIR
 
 PATH=/usr/bin:/bin:/usr/sbin:/sbin
-PATH="$BATS_TEST_DIRNAME/helpers/bin:$PATH"
-PATH="$BATS_TEST_DIRNAME/../bin:$PATH"
-PATH="$BATS_MOCK_BINDIR:$PATH"
+PATH=$BATS_TEST_DIRNAME/../node_modules/.bin:$PATH
+PATH=$BATS_TEST_DIRNAME/helpers/bin:$PATH
+PATH=$BATS_TEST_DIRNAME/../bin:$PATH
+PATH=$BATS_MOCK_BINDIR:$PATH
 export PATH
+
+export NODENV_ROOT=$BATS_TMPDIR/nodenv_root
+mkdir -p "$NODENV_ROOT"
+
+export NODENV_HOOK_PATH=$BATS_TEST_DIRNAME/../etc/nodenv.d
 
 hookdir() {
   local version=$1
@@ -23,7 +27,7 @@ hookdir() {
 }
 
 teardown() {
-  rm -rf "$NODENV_TEST_DIR"
+  rm -rf "$NODENV_ROOT"
   rm -rf "$BATS_MOCK_TMPDIR"
 }
 
@@ -31,7 +35,7 @@ teardown() {
 create_versions() {
   for v in "$@"; do
     echo "Created version: $v"
-    d="$NODENV_TEST_DIR/versions/$v"
+    d="$NODENV_ROOT/versions/$v"
     mkdir -p "$d/bin"
     ln -nfs /bin/echo "$d/bin/node"
   done
