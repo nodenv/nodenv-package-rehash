@@ -5,8 +5,7 @@ load test_helper
 export INSTALL_HOOK="${BATS_TEST_DIRNAME}/../etc/nodenv.d/install/install-pkg-hooks.bash"
 
 @test "running nodenv-install auto installs hook scripts" {
-  stub nodenv-prefix '0.10.36 : echo "$NODENV_ROOT/versions/0.10.36"'
-  run nodenv-install 0.10.36
+  run nodenv install 0.10.36
 
   assert_success
   assert_line 'Installed fake version 0.10.36'
@@ -15,7 +14,7 @@ export INSTALL_HOOK="${BATS_TEST_DIRNAME}/../etc/nodenv.d/install/install-pkg-ho
 }
 
 @test "a failed nodenv-install exits hook script gracefully" {
-  run nodenv-install fail 0.10.36
+  run nodenv install fail 0.10.36
 
   assert_failure
   assert_line 'Failed installation of 0.10.36'

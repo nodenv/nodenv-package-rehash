@@ -19,7 +19,7 @@ after_install() {
   after_hooks["${#after_hooks[@]}"]="$hook"
 }
 
-for script in "$NODENV_HOOK_PATH/install"/*.bash; do
+for script in "${NODENV_HOOK_PATH%%:*}"/install/*.bash; do
   echo Sourcing "$script"
   # shellcheck disable=1090
   source "$script"

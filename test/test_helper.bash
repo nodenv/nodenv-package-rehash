@@ -1,9 +1,8 @@
 # shellcheck shell=bash
 
 BATS_TMPDIR=test/tmp
-load '../node_modules/bats-support/load'
-load '../node_modules/bats-assert/load'
-
+load ../node_modules/bats-support/load
+load ../node_modules/bats-assert/load
 load ../node_modules/bats-mock/stub
 
 # common nodenv setup
