@@ -2,8 +2,6 @@
 
 load test_helper
 
-export INSTALL_HOOK="${BATS_TEST_DIRNAME}/../etc/nodenv.d/install/install-pkg-hooks.bash"
-
 @test "running nodenv-install auto installs hook scripts" {
   run nodenv install 0.10.36
 
