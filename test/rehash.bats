@@ -2,12 +2,14 @@
 
 load test_helper
 
-@test "matching package triggers rehash" {
+libexec=${BATS_TEST_DIRNAME}/../libexec
+
+@test "rehashes for the 'main' package" {
   stub nodenv 'rehash : echo "rehashing"'
   export npm_package_name=lineman
   export npm_config_argv='{"remain":["lineman"],"cooked":["i","--global","lineman"],"original":["i","-g","lineman"]}'
 
-  run ./libexec/nodenv-rehash
+  run $libexec/nodenv-rehash
 
   assert_success
   assert_output "rehashing"
@@ -19,7 +21,7 @@ load test_helper
   export npm_package_name=grunt
   export npm_config_argv='{"remain":["lineman"],"cooked":["i","--global","lineman"],"original":["i","-g","lineman"]}'
 
-  run ./libexec/nodenv-rehash
+  run $libexec/nodenv-rehash
 
   assert_success
   refute_output
