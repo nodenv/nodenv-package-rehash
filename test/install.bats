@@ -2,7 +2,10 @@
 
 load test_helper
 
-@test "running nodenv-install auto installs hook scripts" {
+# integration-y test that go through nodenv itself,
+# but use a fake nodenv-install from test/helpers/bin
+
+@test "nodenv install hook installs npm hook scripts" {
   run nodenv install 0.10.36
 
   assert_success
@@ -11,7 +14,7 @@ load test_helper
   assert_package_hooks 0.10.36
 }
 
-@test "a failed nodenv-install exits hook script gracefully" {
+@test "nodenv install hook exits gracefully after failed node install" {
   run nodenv install fail 0.10.36
 
   assert_failure

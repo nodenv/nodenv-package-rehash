@@ -9,14 +9,9 @@ setup() {
   # two nodes already have hooks
   stub_hooks_for 0.11
   stub_hooks_for 0.12
-
-  refute_package_hooks 0.8
-  refute_package_hooks 0.10
-  assert_package_hooks 0.11
-  assert_package_hooks 0.12
 }
 
-@test "list installed hooks for active node (default)" {
+@test "package-hooks list installed hooks for active node" {
   NODENV_VERSION=0.10 run nodenv package-hooks list
 
   assert_success
@@ -26,7 +21,7 @@ setup() {
 	OUTPUT
 }
 
-@test "lists installed hooks for specified node" {
+@test "package-hooks lists installed hooks for specified node" {
   run nodenv package-hooks list 0.12
 
   assert_success
@@ -37,7 +32,7 @@ setup() {
 	OUTPUT
 }
 
-@test "list installed hooks for all nodes" {
+@test "package-hooks list installed hooks for all nodes" {
   run nodenv package-hooks list --all
 
   assert_success
@@ -55,7 +50,7 @@ setup() {
 	OUTPUT
 }
 
-@test "install hooks for active node (default)" {
+@test "package-hooks install hooks for active node" {
   NODENV_VERSION=0.10 run nodenv package-hooks install
 
   assert_success
@@ -65,7 +60,7 @@ setup() {
   assert_package_hooks 0.12
 }
 
-@test "install hooks for specified node" {
+@test "package-hooks install hooks for specified node" {
   run nodenv package-hooks install 0.8
 
   assert_success
@@ -75,7 +70,7 @@ setup() {
   assert_package_hooks 0.12
 }
 
-@test "install hooks for all nodes" {
+@test "package-hooks install hooks for all nodes" {
   run nodenv package-hooks install --all
 
   assert_success
@@ -85,7 +80,7 @@ setup() {
   assert_package_hooks 0.12
 }
 
-@test "uninstall hooks from active node (default)" {
+@test "package-hooks uninstall hooks from active node" {
   NODENV_VERSION=0.11 run nodenv package-hooks uninstall
 
   assert_success
@@ -95,7 +90,7 @@ setup() {
   assert_package_hooks 0.12
 }
 
-@test "uninstall hooks from specified node" {
+@test "package-hooks uninstall hooks from specified node" {
   run nodenv package-hooks uninstall 0.11
 
   assert_success
@@ -105,7 +100,7 @@ setup() {
   assert_package_hooks 0.12
 }
 
-@test "uninstall hooks from all nodes" {
+@test "package-hooks uninstall hooks from all nodes" {
   run nodenv package-hooks uninstall --all
 
   assert_success

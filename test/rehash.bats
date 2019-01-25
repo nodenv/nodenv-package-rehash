@@ -11,7 +11,7 @@ fake_env_for_npm() {
   export npm_config_argv='{"remain":["'$2'"],"cooked":["i","--global","'$2'"],"original":["i","-g","'$2'"]}'
 }
 
-@test "rehashes for the 'main' package" {
+@test "npm hook rehashes for the 'main' package" {
   stub nodenv 'rehash : echo rehashing'
   fake_env_for_npm install lineman
 
@@ -22,7 +22,7 @@ fake_env_for_npm() {
   unstub nodenv
 }
 
-@test "doesn't rehash for dependencies" {
+@test "npm hook doesn't rehash for dependencies" {
   stub nodenv 'rehash : echo rehashing'
   fake_env_for_npm install lineman
   npm_package_name=grunt
