@@ -26,6 +26,7 @@
     "libexec"
   ],
   "scripts": {
+    "postinstall": "libexec/install-nodenv-hook",
     "start": "npm-packages-rehash",
     "test": "bats ${CI:+--tap} test",
     "posttest": "npm run lint",
