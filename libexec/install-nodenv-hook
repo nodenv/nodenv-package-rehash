@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+set -e
+
+: "${npm_config_argv:=}"
+: "${NODENV_HOOK_PATH:=}"
+
+# detect when `npm install` is run from within the package
+bare_install() {
+  local pattern='"remain":\[\]'
+  [[ $npm_config_argv =~ $pattern ]]
+}
+
+hooks_dir() {
+  local hook_dir=${NODENV_HOOK_PATH#:}
+  hook_dir=${hook_dir%%:*}
+  echo "${hook_dir:-$(nodenv root)/nodenv.d}"
+}
+
+link_hook() {
+  local dir hook
+  hook=etc/nodenv.d/install/install-pkg-hooks.bash
+  dir=$(hooks_dir)/install
+
+  mkdir -p "$dir"
+  ln -sf "$PWD/$hook" "$dir/package-rehash.bash"
+}
+
+if ! bare_install; then
+  link_hook
+  echo "nodenv install hook installed to $(hooks_dir)"
+fi
