@@ -2,7 +2,7 @@
 
 load test_helper
 
-libexec=${BATS_TEST_DIRNAME}/../libexec
+libexec=$BATS_TEST_DIRNAME/../libexec
 
 fake_env_for_npm() {
   export npm_lifecycle_event=post$1
