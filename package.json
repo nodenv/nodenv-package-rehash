@@ -31,12 +31,14 @@
     "test": "bats ${CI:+--tap} test",
     "posttest": "npm run lint",
     "lint": "git ls-files bin etc libexec script */*.bash | xargs shellcheck",
+    "lint:format": "prettier --write .",
     "postversion": "git push --follow-tags"
   },
   "devDependencies": {
     "@nodenv/nodenv": "^1.2.0",
     "bats": "^1.12.0",
     "bats-assert": "^2.0.0",
-    "bats-mock": "^1.2.5"
+    "bats-mock": "^1.2.5",
+    "prettier": "^3.6.2"
   }
 }

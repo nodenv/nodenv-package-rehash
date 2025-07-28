@@ -2,7 +2,7 @@
 
 # nodenv-package-rehash
 
-**Never run `nodenv rehash` again.** 
+**Never run `nodenv rehash` again.**
 
 This nodenv plugin automatically
 runs `nodenv rehash` every time you install or uninstall a global package.
@@ -10,12 +10,12 @@ runs `nodenv rehash` every time you install or uninstall a global package.
 <!-- toc -->
 
 - [Installation](#installation)
-  * [install via git *(recommended)*](#install-via-git-recommended)
-  * [install via homebrew](#install-via-homebrew)
-  * [install via npm](#install-via-npm)
-- [Configuration *(optional)*](#configuration-optional)
+  - [install via git _(recommended)_](#install-via-git-recommended)
+  - [install via homebrew](#install-via-homebrew)
+  - [install via npm](#install-via-npm)
+- [Configuration _(optional)_](#configuration-optional)
 - [Usage](#usage)
-  * [Subcommands](#subcommands)
+  - [Subcommands](#subcommands)
 - [How It Works](#how-it-works)
 - [Caveats](#caveats)
 - [Credits](#credits)
@@ -31,29 +31,29 @@ and the package-rehash hook should be included in the output of
 Then you may install the hooks for your existing nodenv versions.
 (This will be done automatically for any node you install henceforth.)
 
-  ```sh
-  nodenv package-hooks install --all
-  ```
+```sh
+nodenv package-hooks install --all
+```
 
-### install via git *(recommended)*
+### install via git _(recommended)_
 
 Install the plugin:
 
-  ```sh
-  git clone https://github.com/nodenv/nodenv-package-rehash.git "$(nodenv root)"/plugins/nodenv-package-rehash
-  ```
+```sh
+git clone https://github.com/nodenv/nodenv-package-rehash.git "$(nodenv root)"/plugins/nodenv-package-rehash
+```
 
 ### install via homebrew
 
-  ```sh
-  brew install nodenv/nodenv/nodenv-package-rehash
-  ```
+```sh
+brew install nodenv/nodenv/nodenv-package-rehash
+```
 
 ### install via npm
 
-  ```sh
-  npm i -g @nodenv/nodenv-package-rehash
-  ```
+```sh
+npm i -g @nodenv/nodenv-package-rehash
+```
 
 This method is not recommended, because of the likelihood that the nodenv plugin gets installed under a node being _managed_ by nodenv.
 If using this method, it is highly recommended to install the plugin into your `system` node.
@@ -61,25 +61,25 @@ If using this method, it is highly recommended to install the plugin into your `
 Also note, this package requires a package level npm postinstall hook to ensure the nodenv-install hook is found by `nodenv hooks install`.
 If you install this package with lifecycle hooks disabled, you will need to do this manually either by a one-time symlink:
 
-  ```sh
-  ln -s "$(npm -g prefix)/lib/node_modules/@nodenv/nodenv-package-rehash/etc/nodenv.d/install/install-pkg-hooks.bash" "$(nodenv root)/nodenv.d/install/package-rehash.bash
-  ```
+```sh
+ln -s "$(npm -g prefix)/lib/node_modules/@nodenv/nodenv-package-rehash/etc/nodenv.d/install/install-pkg-hooks.bash" "$(nodenv root)/nodenv.d/install/package-rehash.bash
+```
 
 or by configuring `NODENV_HOOK_PATH` in your shell startup:
 
-  ```sh
-  export NODENV_HOOK_PATH=$(npm -g prefix)/lib/node_modules/@nodenv/nodenv-package-rehash/etc/nodenv.d/:$NODENV_HOOK_PATH
-  ```
+```sh
+export NODENV_HOOK_PATH=$(npm -g prefix)/lib/node_modules/@nodenv/nodenv-package-rehash/etc/nodenv.d/:$NODENV_HOOK_PATH
+```
 
-## Configuration *(optional)*
+## Configuration _(optional)_
 
 With this plugin, rehashing will happen on-demand (when global npm modules are installed/uninstalled).
 You can take advantage of this and remove nodenv's _automatic_ hashing upon [shell initialization][].
 In your shell startup file (`.bash_profile`, `.bashrc`, or `.zshrc`), add the `--no-rehash` flag to the `nodenv init -` invocation:
 
-  ```sh
-  eval "$(nodenv init - --no-rehash)"
-  ```
+```sh
+eval "$(nodenv init - --no-rehash)"
+```
 
 This will speed up your shell initialization since nodenv will no longer need to rehash on every startup.
 
@@ -94,22 +94,21 @@ Three sub commands are available for manual hook management.
 
 1. `nodenv package-hooks list [ --all | <version-name>... ]`
 
-    Lists any hooks installed for the given version(s)
+   Lists any hooks installed for the given version(s)
 
 2. `nodenv package-hooks install [ --all | <version-name>... ]`
 
-    Installs postinstall/postuninstall rehash hooks for the given version(s)
+   Installs postinstall/postuninstall rehash hooks for the given version(s)
 
 3. `nodenv package-hooks uninstall [ --all | <version-name>... ]`
 
-    Uninstalls postinstall/postuninstall rehash hooks for the given version(s)
+   Uninstalls postinstall/postuninstall rehash hooks for the given version(s)
 
 All three sub commands accept similar arguments:
 
 1. no arg: applies the command only to the currently active node version
 2. version-name: a whitespace-separate list of 1 or more explicit versions (e.g. 0.10.24)
 3. `--all`: applies the command to all installed versions
-
 
 ## How It Works
 
