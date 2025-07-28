@@ -40,7 +40,7 @@
     "@nodenv/nodenv": "^1.2.0",
     "bats": "^1.12.0",
     "bats-assert": "^2.0.0",
-    "bats-mock": "^1.0.1",
+    "bats-mock": "^1.2.5",
     "brew-publish": "^2.3.1"
   }
 }
