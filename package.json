@@ -35,7 +35,7 @@
     "postversion": "git push --follow-tags"
   },
   "devDependencies": {
-    "@nodenv/nodenv": "^1.4.1",
+    "@nodenv/nodenv": "^1.5.0",
     "bats": "^1.12.0",
     "bats-assert": "^2.0.0",
     "bats-mock": "^1.2.5",
