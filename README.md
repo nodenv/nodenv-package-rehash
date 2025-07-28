@@ -8,8 +8,8 @@ runs `nodenv rehash` every time you install or uninstall a global package.
 <!-- toc -->
 
 - [Installation](#installation)
-  - [install via git _(recommended)_](#install-via-git-recommended)
-  - [install via homebrew](#install-via-homebrew)
+  - [install via Git _(recommended)_](#install-via-git-recommended)
+  - [install via Homebrew](#install-via-homebrew)
   - [install via npm](#install-via-npm)
 - [Configuration _(optional)_](#configuration-optional)
 - [Usage](#usage)
@@ -33,7 +33,7 @@ Then you may install the hooks for your existing nodenv versions.
 nodenv package-hooks install --all
 ```
 
-### install via git _(recommended)_
+### install via Git _(recommended)_
 
 Install the plugin:
 
@@ -41,7 +41,7 @@ Install the plugin:
 git clone https://github.com/nodenv/nodenv-package-rehash.git "$(nodenv root)"/plugins/nodenv-package-rehash
 ```
 
-### install via homebrew
+### install via Homebrew
 
 ```sh
 brew install nodenv/nodenv/nodenv-package-rehash
