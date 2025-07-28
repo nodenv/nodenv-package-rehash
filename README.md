@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.org/nodenv/nodenv-package-rehash.svg?branch=master)](https://travis-ci.org/nodenv/nodenv-package-rehash)
-
 # nodenv-package-rehash
 
 **Never run `nodenv rehash` again.**
