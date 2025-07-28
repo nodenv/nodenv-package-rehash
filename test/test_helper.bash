@@ -34,7 +34,7 @@ teardown() {
 create_versions() {
   for v in "$@"; do
     echo "Created version: $v"
-    mkdir -p "$NODENV_ROOT/versions/$v"
+    mkdir -p "$NODENV_ROOT/versions/$v/bin"
   done
 }
 
