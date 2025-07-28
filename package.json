@@ -31,16 +31,12 @@
     "test": "bats ${CI:+--tap} test",
     "posttest": "npm run lint",
     "lint": "git ls-files bin etc libexec test/*.bash | xargs shellcheck",
-    "postversion": "npm publish",
-    "prepublishOnly": "npm run publish:github && npm run publish:brew",
-    "publish:brew": "brew-publish",
-    "publish:github": "git push --follow-tags"
+    "postversion": "git push --follow-tags"
   },
   "devDependencies": {
     "@nodenv/nodenv": "^1.2.0",
     "bats": "^1.12.0",
     "bats-assert": "^2.0.0",
-    "bats-mock": "^1.2.5",
-    "brew-publish": "^2.3.1"
+    "bats-mock": "^1.2.5"
   }
 }
