@@ -5,7 +5,7 @@
   "homepage": "https://github.com/nodenv/nodenv-package-rehash#readme",
   "license": "MIT",
   "contributors": [
-    "Jason Karns <jason@karns.name> (http://jason.karns.name)",
+    "Jason Karns <jason.karns@gmail.com> (http://jasonkarns.com)",
     "Joshua Peek <josh@joshpeek.com> (https://twitter.com/joshpeekkk)"
   ],
   "repository": {
@@ -30,18 +30,16 @@
     "start": "npm-packages-rehash",
     "test": "bats ${CI:+--tap} test",
     "posttest": "npm run lint",
-    "lint": "git ls-files bin etc libexec test/*.bash | xargs shellcheck",
-    "postversion": "npm publish",
-    "prepublishOnly": "npm run publish:github && npm run publish:brew",
-    "publish:brew": "brew-publish",
-    "publish:github": "git push --follow-tags"
+    "lint": "git ls-files bin etc libexec script */*.bash | xargs shellcheck",
+    "lint:format": "prettier --write .",
+    "postversion": "git push --follow-tags"
   },
   "devDependencies": {
-    "@nodenv/nodenv": "^1.2.0",
-    "bats": "^1.1.0",
-    "bats-assert": "jasonkarns/bats-assert-1",
-    "bats-mock": "^1.0.1",
-    "bats-support": "jasonkarns/bats-support",
-    "brew-publish": "^2.3.1"
+    "@nodenv/nodenv": "^1.6.1",
+    "bats": "^1.12.0",
+    "bats-assert": "^2.0.0",
+    "bats-mock": "^1.2.5",
+    "prettier": "^3.6.2",
+    "shellcheck": "^3.1.0"
   }
 }
