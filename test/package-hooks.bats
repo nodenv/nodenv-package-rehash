@@ -37,6 +37,8 @@ setup() {
 
   assert_success
   assert_output - <<-OUTPUT
+		0.8
+		no hooks installed
 		0.10
 		no hooks installed
 		0.11
@@ -45,8 +47,6 @@ setup() {
 		0.12
 		postinstall
 		postuninstall
-		0.8
-		no hooks installed
 	OUTPUT
 }
 
