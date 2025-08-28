@@ -37,7 +37,7 @@
   "devDependencies": {
     "@nodenv/nodenv": "^1.6.2",
     "bats": "^1.12.0",
-    "bats-assert": "^2.0.0",
+    "bats-assert": "^2.2.0",
     "bats-mock": "^1.2.5",
     "prettier": "^3.6.2",
     "shellcheck": "^4.1.0"
