@@ -39,7 +39,7 @@
     "bats": "^1.13.0",
     "bats-assert": "^2.0.0",
     "bats-mock": "^1.2.5",
-    "prettier": "^3.7.1",
+    "prettier": "^3.7.3",
     "shellcheck": "^4.1.0"
   }
 }
