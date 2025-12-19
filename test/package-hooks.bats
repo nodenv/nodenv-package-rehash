@@ -1,4 +1,5 @@
 #!/usr/bin/env bats
+# editorconfig-checker-disable-file
 
 load test_helper
 

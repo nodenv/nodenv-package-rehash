@@ -33,7 +33,6 @@ buggy_npm_version() {
   [[ "$npm_package_version" =~ $buggy_versions ]]
 }
 
-
 # This hook gets invoked when installing dependencies, too, but
 # we only care about the "main" package installed specifically by the user.
 # That way we only rehash once for a global install, not hundreds of times.
@@ -42,6 +41,7 @@ if ! main_package; then
 fi
 
 if installing_npm && buggy_npm_version; then
+  # editorconfig-checker-disable
   warn <<-MSG
 
 		WARNING: Automatic rehashing provided by nodenv-package-rehash will not work
@@ -52,6 +52,7 @@ if installing_npm && buggy_npm_version; then
 		global packages. see https://github.com/nodenv/nodenv-package-rehash/issues/22
 
 MSG
+  # editorconfig-checker-enable
 fi
 
 nodenv rehash || error "error rehashing; manual \`nodenv rehash' likely needed"

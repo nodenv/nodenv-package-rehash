@@ -19,7 +19,7 @@ buggy_npm_version() {
 }
 
 warn_buggy_npm() {
-  ! buggy_npm_version || cat <<- MSG
+  ! buggy_npm_version || cat <<-MSG
 
 WARNING: Automatic rehashing provided by nodenv-package-rehash will not
 function correctly for this node version unless you upgrade npm >=6.1.0.
