@@ -6,7 +6,7 @@ libexec=$BATS_TEST_DIRNAME/../libexec
 
 fake_npm_env() {
   export npm_config_argv='{"remain":["@nodenv/nodenv-package-rehash"],"cooked":["i","@nodenv/nodenv-package-rehash"],"original":["i","@nodenv/nodenv-package-rehash"]}'
-  cd $BATS_TEST_DIRNAME/..
+  cd "$BATS_TEST_DIRNAME/.." || return
 }
 
 assert_nodenv_hook_installed() {
@@ -17,7 +17,7 @@ assert_nodenv_hook_installed() {
   fake_npm_env
   npm_config_argv='{"remain":[],"cooked":["i"],"original":["i"]}'
 
-  run $libexec/install-nodenv-hook
+  run "$libexec"/install-nodenv-hook
 
   assert_success
   refute_output
@@ -26,9 +26,9 @@ assert_nodenv_hook_installed() {
 @test "npm installs nodenv hook to NODENV_HOOK_PATH when set" {
   fake_npm_env
   export NODENV_HOOK_PATH=$BATS_TMPDIR/hooks
-  mkdir -p $NODENV_HOOK_PATH
+  mkdir -p "$NODENV_HOOK_PATH"
 
-  run $libexec/install-nodenv-hook
+  run "$libexec"/install-nodenv-hook
 
   assert_success
   assert_nodenv_hook_installed "$NODENV_HOOK_PATH"
@@ -39,7 +39,7 @@ assert_nodenv_hook_installed() {
   fake_npm_env
   unset NODENV_HOOK_PATH
 
-  run $libexec/install-nodenv-hook
+  run "$libexec"/install-nodenv-hook
 
   assert_success
   assert_nodenv_hook_installed "$NODENV_ROOT/nodenv.d"
