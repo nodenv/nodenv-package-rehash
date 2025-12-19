@@ -30,7 +30,7 @@
     "start": "npm-packages-rehash",
     "test": "bats ${CI:+--tap} test",
     "posttest": "npm run lint",
-    "lint": "git ls-files bin etc libexec script */*.bash | xargs shellcheck",
+    "lint": "git ls-files bin etc libexec script test */*.bash | xargs shellcheck",
     "lint:format": "prettier --write .",
     "postversion": "git push --follow-tags"
   },
