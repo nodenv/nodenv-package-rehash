@@ -9,7 +9,6 @@ permissions: {}
 jobs:
   test:
     uses: nodenv/.github/.github/workflows/test.yml@v7
-    with: { superlinter: false }
     permissions:
       contents: read
       packages: read
