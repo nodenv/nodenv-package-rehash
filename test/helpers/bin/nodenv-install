@@ -14,6 +14,7 @@ set -e
 # after the installation process.
 declare -a after_hooks
 
+# shellcheck disable=SC2329
 after_install() {
   local hook="$1"
   after_hooks["${#after_hooks[@]}"]="$hook"

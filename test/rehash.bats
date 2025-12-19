@@ -17,7 +17,7 @@ fake_env_for_npm() {
   stub nodenv 'rehash : true'
   fake_env_for_npm install lineman
 
-  run $libexec/nodenv-rehash
+  run "$libexec"/nodenv-rehash
 
   assert_success
   unstub nodenv
@@ -28,7 +28,7 @@ fake_env_for_npm() {
   fake_env_for_npm install lineman
   npm_package_name=grunt
 
-  run $libexec/nodenv-rehash
+  run "$libexec"/nodenv-rehash
 
   assert_success
   refute_output
@@ -38,7 +38,7 @@ fake_env_for_npm() {
   stub nodenv 'rehash : true'
   fake_env_for_npm install testdouble latest
 
-  run $libexec/nodenv-rehash
+  run "$libexec"/nodenv-rehash
 
   assert_success
   unstub nodenv
@@ -48,7 +48,7 @@ fake_env_for_npm() {
   stub nodenv 'rehash : true'
   fake_env_for_npm install @org/testdouble
 
-  run $libexec/nodenv-rehash
+  run "$libexec"/nodenv-rehash
 
   assert_success
   unstub nodenv
@@ -58,7 +58,7 @@ fake_env_for_npm() {
   stub nodenv 'rehash : true'
   fake_env_for_npm install @org/testdouble latest
 
-  run $libexec/nodenv-rehash
+  run "$libexec"/nodenv-rehash
 
   assert_success
   unstub nodenv
@@ -68,7 +68,7 @@ fake_env_for_npm() {
   stub nodenv 'rehash : true'
   unset npm_package_name npm_package_version npm_config_argv
 
-  run $libexec/nodenv-rehash
+  run "$libexec"/nodenv-rehash
 
   assert_success
   assert_output "nodenv-package-rehash: can't determine target package"
@@ -79,7 +79,7 @@ fake_env_for_npm() {
   stub nodenv 'rehash : false'
   fake_env_for_npm install teenytest
 
-  run $libexec/nodenv-rehash
+  run "$libexec"/nodenv-rehash
 
   assert_success
   assert_output "nodenv-package-rehash: error rehashing; manual \`nodenv rehash' likely needed"
@@ -90,7 +90,7 @@ fake_env_for_npm() {
   stub nodenv 'rehash : true'
   fake_env_for_npm install npm 5.10.0
 
-  run $libexec/nodenv-rehash
+  run "$libexec"/nodenv-rehash
 
   assert_success
   assert_line "WARNING: Automatic rehashing provided by nodenv-package-rehash will not work"
@@ -101,7 +101,7 @@ fake_env_for_npm() {
   stub nodenv 'rehash : true'
   fake_env_for_npm install yarn 5.10.0
 
-  run $libexec/nodenv-rehash
+  run "$libexec"/nodenv-rehash
 
   assert_success
   refute_line -p "WARNING: Automatic rehashing"
@@ -112,7 +112,7 @@ fake_env_for_npm() {
   stub nodenv 'rehash : true'
   fake_env_for_npm uninstall npm 5.10.0
 
-  run $libexec/nodenv-rehash
+  run "$libexec"/nodenv-rehash
 
   assert_success
   refute_line -p "WARNING: Automatic rehashing"
