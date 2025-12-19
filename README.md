@@ -20,6 +20,8 @@ runs `nodenv rehash` every time you install or uninstall a global package.
 
 <!-- tocstop -->
 
+<!-- editorconfig-checker-disable-file -->
+
 ## Installation
 
 After installation, you should have a `nodenv package-hooks` subcommand,

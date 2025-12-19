@@ -41,6 +41,7 @@ if ! main_package; then
 fi
 
 if installing_npm && buggy_npm_version; then
+  # editorconfig-checker-disable
   warn <<-MSG
 
 		WARNING: Automatic rehashing provided by nodenv-package-rehash will not work
@@ -51,6 +52,7 @@ if installing_npm && buggy_npm_version; then
 		global packages. see https://github.com/nodenv/nodenv-package-rehash/issues/22
 
 MSG
+  # editorconfig-checker-enable
 fi
 
 nodenv rehash || error "error rehashing; manual \`nodenv rehash' likely needed"
