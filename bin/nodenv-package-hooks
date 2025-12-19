@@ -20,7 +20,6 @@ HOOKS_DIR="lib/node_modules/.hooks"
 POSTINSTALL_HOOK="$HOOKS_DIR/postinstall"
 POSTUNINSTALL_HOOK="$HOOKS_DIR/postuninstall"
 
-
 versions() {
   case "$1" in
     "")    nodenv-version-name    ;; # list active version
@@ -77,8 +76,8 @@ uninstall_hooks() {
 unset cmd
 
 case "$1" in
-# Provide nodenv completions
-  --complete )
+  # Provide nodenv completions
+  --complete)
     echo list
     echo install
     echo uninstall
@@ -86,7 +85,7 @@ case "$1" in
     nodenv-versions --bare
     exit
     ;;
-  list | install | uninstall )
+  list | install | uninstall)
     cmd="$1"
     shift
     ;;

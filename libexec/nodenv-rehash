@@ -33,7 +33,6 @@ buggy_npm_version() {
   [[ "$npm_package_version" =~ $buggy_versions ]]
 }
 
-
 # This hook gets invoked when installing dependencies, too, but
 # we only care about the "main" package installed specifically by the user.
 # That way we only rehash once for a global install, not hundreds of times.
